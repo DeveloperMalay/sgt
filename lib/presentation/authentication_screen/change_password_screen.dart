@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sgt/presentation/authentication_screen/change_password_screen.dart';
+import 'package:sgt/presentation/authentication_screen/password_change_success_screen.dart';
 import '../../utils/const.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class ChangePasswordScreen extends StatefulWidget {
+  const ChangePasswordScreen({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +26,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             Navigator.pop(context);
           },
         ),
-        title: const Text(
-          'Forgot Password',
-          style: TextStyle(color: Colors.black),
-        ),
       ),
       body: Container(
         color: Colors.white,
@@ -39,19 +35,30 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             height: 40,
           ),
           const Text(
-            'Enter your email and will send you instruction on how to reset it',
-            style: TextStyle(fontSize: 18),
+            'Change Password',
+            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
           const SizedBox(
             height: 40,
           ),
           const Text(
-            'Email',
+            'New Password',
             style: TextStyle(color: Colors.grey),
           ),
           TextFormField(
-            decoration: InputDecoration(
-                hintText: 'johndoe@mail.com', focusColor: primaryColor),
+            decoration:
+                InputDecoration(hintText: '******', focusColor: primaryColor),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          const Text(
+            'Re-Enter New Password',
+            style: TextStyle(color: Colors.grey),
+          ),
+          TextFormField(
+            decoration:
+                InputDecoration(hintText: '******', focusColor: primaryColor),
           ),
           const SizedBox(
             height: 40,
@@ -67,7 +74,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ChangePasswordScreen();
+                  return const PasswordChangeSuccessScreen();
                 }));
               },
             ),

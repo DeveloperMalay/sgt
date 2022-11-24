@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:sgt/utils/const.dart';
-
 import 'presentation/onboarding_screen/onboarding_screen.dart';
 
 void main() {

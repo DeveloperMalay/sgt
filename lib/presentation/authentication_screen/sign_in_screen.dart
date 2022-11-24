@@ -4,6 +4,7 @@ import 'package:sgt/helper/email_validator.dart';
 import 'package:sgt/helper/password_validator.dart';
 import 'package:sgt/presentation/authentication_screen/forgot_password_screen.dart';
 import 'package:sgt/presentation/authentication_screen/sign_up_screen.dart';
+import 'package:sgt/presentation/home.dart';
 import 'package:sgt/utils/const.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -16,7 +17,8 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
-
+  bool isvisible = false;
+  bool isButtonActive = false;
   @override
   void initState() {
     _emailController = TextEditingController();
@@ -74,8 +76,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         hintText: 'johndoe@mail.com', focusColor: primaryColor),
                     onChanged: (value) {
                       _formKey.currentState!.validate()
-                          ? Text("data")
-                          : Text('data');
+                          ? setState(() {
+                              isButtonActive = !isButtonActive;
+                            })
+                          : null;
                     },
                   ),
                   const SizedBox(
@@ -87,22 +91,35 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   TextFormField(
                     controller: _passwordController,
-                    validator: (input) => input!.isValidPassword()
-                        ? null
-                        : "! Password is Incorrect",
-                    maxLength: 64,
-                    obscureText: true,
-                    decoration: const InputDecoration(
+                    validator: (input) =>
+                        input == null ? 'Password is Empty' : null,
+                    maxLength: 8,
+                    obscureText: isvisible,
+                    decoration: InputDecoration(
                         hintText: '****',
-                        suffixIcon: Icon(
-                          Icons.visibility_off_outlined,
-                          color: Colors.black,
-                          size: 20,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isvisible = !isvisible;
+                            });
+                            print(isvisible);
+                          },
+                          icon: isvisible
+                              ? const Icon(
+                                  Icons.visibility_off_outlined,
+                                  color: Colors.black,
+                                  size: 20,
+                                )
+                              : const Icon(
+                                  Icons.visibility_outlined,
+                                  color: Colors.black,
+                                  size: 20,
+                                ),
                         )),
                     onChanged: (value) {
                       _formKey.currentState!.validate()
-                          ? Text("data")
-                          : Text('data');
+                          ? setState(() {})
+                          : null;
                     },
                   ),
                   const SizedBox(
@@ -121,19 +138,22 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   Center(
                     child: CupertinoButton(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 130, vertical: 15),
-                      color: seconderyColor,
-                      child: const Text(
-                        'Sign In',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {},
-                    ),
+                        disabledColor: seconderyColor,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 130, vertical: 15),
+                        color: primaryColor,
+                        child: const Text(
+                          'Sign In',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return const Home();
+                          }));
+                        }),
                   ),
-                  const SizedBox(
-                    height: 260,
-                  ),
+                  const SizedBox(height: 240),
                   InkWell(
                     onTap: () {
                       Navigator.push(context,

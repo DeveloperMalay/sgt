@@ -37,6 +37,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   smooth_page_indicator: ^1.0.0+2
+  bloc: ^8.1.0
+  flutter_bloc: ^8.1.1
+  equatable: ^2.0.5
+  pinput: ^2.2.16
+  otp_timer_button: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -63,12 +68,14 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/sgt_logo.png
+    - assets/sgt_logo_dark.png
     - assets/onboarding_img1.png
     - assets/onboarding_img2.png
     - assets/onboarding_img3.png
     - assets/shield.png
     - assets/search.png
     - assets/calendar.png
+    - assets/success.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

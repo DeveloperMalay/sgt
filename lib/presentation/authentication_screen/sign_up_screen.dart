@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sgt/presentation/authentication_screen/verification_screen.dart';
 import 'package:sgt/utils/const.dart';
 
 import 'sign_in_screen.dart';
@@ -159,7 +160,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       'Sign In',
                       style: TextStyle(fontSize: 20),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const VerificationScreen();
+                      }));
+                    },
                   ),
                 ),
                 const SizedBox(
