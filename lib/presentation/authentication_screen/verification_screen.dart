@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:sgt/presentation/share_location_screen/share_location_screen.dart';
 import 'package:sgt/utils/const.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -47,7 +48,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
               'Verifying your\nnumber',
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             ),
-            Text(
+            const Text(
               'We’ve sent your verification code to +1 310 830 45321',
               style: TextStyle(
                 color: Colors.grey,
@@ -55,7 +56,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Text(
+            const Text(
               'Enter Code ',
               style: TextStyle(
                 color: Colors.grey,
@@ -96,7 +97,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const VerificationScreen();
+                    return const ShareLocationScreen();
                   }));
                 },
               ),

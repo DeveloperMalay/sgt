@@ -6,3 +6,4 @@ Color primaryColor = const Color(0xFF254993);
 Color seconderyColor = const Color(0xFFBBD6FF);
 Color black = Colors.black;
 Color white = Colors.white;
+Color grey = const Color(0xFFE4E4E4);

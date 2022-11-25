@@ -43,20 +43,118 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(50)),
-                          child: Text(''),
+                          child: Icon(
+                            Icons.camera_alt_outlined,
+                            color: white,
+                            size: 70,
+                          ),
                         ),
                         Positioned(
-                          top: 65,
-                          left: 70,
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                                color: primaryColor,
-                                borderRadius: BorderRadius.circular(50)),
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
+                          top: 70,
+                          left: 60,
+                          child: InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 25),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Text(
+                                            'Select Media From?',
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                          const Text(
+                                            'Use camera or select file from device gallery',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Color.fromARGB(
+                                                    255, 109, 109, 109)),
+                                          ),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                      color: grey,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.camera_alt,
+                                                      size: 30,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  const Text('Camera')
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                      color: white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 5,
+                                                          blurRadius: 7,
+                                                          offset: const Offset(
+                                                              0,
+                                                              3), // changes position of shadow
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.photo_outlined,
+                                                      size: 30,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  const Text('Gallery')
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                  color: primaryColor,
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         )
@@ -131,16 +229,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  // mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Center(
+                  children: [
+                    Icon(
+                      Icons.check_circle,
+                      color: greenColor,
+                    ),
+                    const Center(
                       child: Text(
                         "I agree to the",
                         style: TextStyle(color: Colors.grey, fontSize: 18),
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Text(
                         "Terms of Service",
                         style: TextStyle(color: Colors.black, fontSize: 18),
@@ -157,7 +257,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         horizontal: 130, vertical: 15),
                     color: seconderyColor,
                     child: const Text(
-                      'Sign In',
+                      'Sign Up',
                       style: TextStyle(fontSize: 20),
                     ),
                     onPressed: () {
