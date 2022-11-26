@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sgt/presentation/jobs_screen/widgets/job_tiles.dart';
 
 class InactiveJobsTab extends StatelessWidget {
   const InactiveJobsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Text('inactive jobs');
+    return ListView.builder(
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return const JobsTile(
+            isActive: false,
+          );
+        });
   }
 }
