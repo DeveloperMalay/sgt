@@ -9,8 +9,19 @@ class ActiveJobsTab extends StatelessWidget {
     return ListView.builder(
         itemCount: 5,
         itemBuilder: (context, index) {
-          return const JobsTile(
-            isActive: true,
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              JobsTile(
+                isActive: true,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 80.0),
+                child: Divider(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
           );
         });
   }

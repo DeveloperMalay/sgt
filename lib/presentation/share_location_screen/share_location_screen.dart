@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sgt/presentation/home.dart';
-
 import '../../utils/const.dart';
 
 class ShareLocationScreen extends StatelessWidget {

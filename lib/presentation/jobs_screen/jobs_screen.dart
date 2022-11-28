@@ -66,7 +66,7 @@ class JobsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 700,
                 child: TabBarView(children: [
                   ActiveJobsTab(),

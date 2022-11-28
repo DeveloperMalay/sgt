@@ -29,12 +29,13 @@ class JobsTile extends StatelessWidget {
                 ),
                 isActive
                     ? Positioned(
-                        top: 45,
+                        top: 43,
                         left: 40,
                         child: Container(
-                          height: 15,
-                          width: 15,
+                          height: 17,
+                          width: 17,
                           decoration: BoxDecoration(
+                            border: Border.all(color: white, width: 3),
                             color: greenColor,
                             borderRadius: BorderRadius.circular(50),
                           ),
@@ -50,13 +51,12 @@ class JobsTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Rivi Properties',
-                  style: TextStyle(fontSize: 17),
-                ),
-                const Text(
-                  'Guard Post Duties',
-                  style: TextStyle(fontSize: 17),
+                const Padding(
+                  padding: EdgeInsets.only(left: 4.0),
+                  child: Text(
+                    'Rivi Properties',
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -67,10 +67,18 @@ class JobsTile extends StatelessWidget {
                       size: 17,
                     ),
                     Text(
-                      'Guard Post Duties',
-                      style: TextStyle(fontSize: 17, color: Colors.grey),
+                      '1517 South Centelella',
+                      style: TextStyle(fontSize: 15, color: Colors.grey),
                     )
                   ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 18.0),
+                  child: Text(
+                    'Guard Post Duties',
+                    style: TextStyle(
+                        fontSize: 17, color: Color.fromARGB(255, 75, 75, 75)),
+                  ),
                 ),
               ],
             )
