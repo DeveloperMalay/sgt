@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sgt/utils/const.dart';
 
 class BuildPages extends StatelessWidget {
@@ -48,22 +49,25 @@ class BuildPages extends StatelessWidget {
             ),
             Text(
               smallText,
-              style: TextStyle(fontSize: 20, color: primaryColor),
+              style: TextStyle(fontSize: 20.sp, color: primaryColor),
+              textScaleFactor: 1.0,
             ),
             const SizedBox(
               height: 15,
             ),
             Text(
               bigText,
-              style: const TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 45.sp, fontWeight: FontWeight.bold),
+              textScaleFactor: 1.0,
             ),
             const SizedBox(
-              height: 15,
+              height: 10,
             ),
             Text(
               descriptionText,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 22, color: Colors.grey),
+              style: TextStyle(fontSize: 17.sp, color: Colors.grey),
+              textScaleFactor: 1.0,
             ),
           ],
         ),

@@ -26,6 +26,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             Navigator.pop(context);
           },
         ),
+        centerTitle: true,
         title: const Text(
           'Forgot Password',
           style: TextStyle(color: Colors.black),
@@ -51,7 +52,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           ),
           TextFormField(
             decoration: InputDecoration(
-                hintText: 'johndoe@mail.com', focusColor: primaryColor),
+                hintText: 'jenny@mail.com', focusColor: primaryColor),
           ),
           const SizedBox(
             height: 40,

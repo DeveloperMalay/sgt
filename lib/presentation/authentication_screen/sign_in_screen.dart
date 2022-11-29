@@ -93,7 +93,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     controller: _passwordController,
                     validator: (input) =>
                         input == null ? 'Password is Empty' : null,
-                    maxLength: 8,
                     obscureText: isvisible,
                     decoration: InputDecoration(
                         hintText: '****',

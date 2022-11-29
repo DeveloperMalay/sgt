@@ -32,68 +32,61 @@ class _PasswordChangeSuccessScreenState
       body: Container(
         color: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Center(
-            child: Container(
-              height: 130,
-              width: 250,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/sgt_logo_dark.png"),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  height: 150,
+                  width: 250,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/success.png"),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          Center(
-            child: Container(
-              height: 150,
-              width: 250,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/success.png"),
+              Center(
+                child: Text(
+                  "Password Changed\nSuccessfully!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: primaryColor,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
-          ),
-          Center(
-            child: Text(
-              "Password Changed\nSuccessfully!",
-              textAlign: TextAlign.center,
-              style: TextStyle(
+              const SizedBox(
+                height: 200,
+              ),
+              const Center(
+                child: Text(
+                  'You can now log-in to your SGT account',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: CupertinoButton(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
                   color: primaryColor,
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(
-            height: 250,
-          ),
-          const Center(
-            child: Text(
-              'You can now log-in to your SocioMee account',
-              style: TextStyle(fontSize: 12),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Center(
-            child: CupertinoButton(
-              padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-              color: primaryColor,
-              child: const Text(
-                'BACK TO LOGIN',
-                style: TextStyle(fontSize: 20),
+                  child: const Text(
+                    'BACK TO LOGIN',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const SignInScreen();
+                    }));
+                  },
+                ),
               ),
-              onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return const SignInScreen();
-                }));
-              },
-            ),
-          ),
-        ]),
+            ]),
       ),
     );
   }

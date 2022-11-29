@@ -331,7 +331,11 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                     ],
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
+                  ),
+                  const Divider(
+                    thickness: 1,
+                    color: Colors.grey,
                   ),
                   CupertinoButton(
                       color: primaryColor,
