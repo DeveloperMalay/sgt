@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sgt/utils/const.dart';
 
 class BuildPages extends StatelessWidget {
@@ -30,6 +31,7 @@ class BuildPages extends StatelessWidget {
             Image.asset(
               imageUrl,
               fit: BoxFit.cover,
+              height: 270.h,
               width: double.infinity,
             ),
             const SizedBox(
@@ -49,7 +51,9 @@ class BuildPages extends StatelessWidget {
             ),
             Text(
               smallText,
-              style: TextStyle(fontSize: 20.sp, color: primaryColor),
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(fontSize: 20.sp, color: primaryColor),
+              ),
               textScaleFactor: 1.0,
             ),
             const SizedBox(
@@ -57,7 +61,10 @@ class BuildPages extends StatelessWidget {
             ),
             Text(
               bigText,
-              style: TextStyle(fontSize: 45.sp, fontWeight: FontWeight.bold),
+              style: GoogleFonts.montserrat(
+                textStyle:
+                    TextStyle(fontSize: 45.sp, fontWeight: FontWeight.bold),
+              ),
               textScaleFactor: 1.0,
             ),
             const SizedBox(
@@ -66,7 +73,9 @@ class BuildPages extends StatelessWidget {
             Text(
               descriptionText,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 17.sp, color: Colors.grey),
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(fontSize: 17.sp, color: Colors.grey),
+              ),
               textScaleFactor: 1.0,
             ),
           ],

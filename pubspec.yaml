@@ -44,6 +44,8 @@ dependencies:
   otp_timer_button: ^1.1.0
   google_maps_flutter: ^2.2.1
   flutter_screenutil: ^5.6.0
+  google_fonts: ^3.0.1
+  dotted_border: ^2.0.0+3
 
 dev_dependencies:
   flutter_test:

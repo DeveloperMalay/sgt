@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sgt/helper/email_validator.dart';
 import 'package:sgt/helper/password_validator.dart';
 import 'package:sgt/presentation/authentication_screen/forgot_password_screen.dart';
@@ -46,8 +47,8 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 30,
+                  SizedBox(
+                    height: 80.h,
                   ),
                   const Text(
                     'Welcome\nback',
@@ -61,7 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     style: TextStyle(color: Colors.grey, fontSize: 17),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
                   const Text(
                     'Email',
@@ -71,9 +72,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     controller: _emailController,
                     validator: (input) => input!.isValidEmail()
                         ? null
-                        : "! Email ID is Incorrect",
+                        : " \u26A0 Email ID is Incorrect",
                     decoration: InputDecoration(
-                        hintText: 'johndoe@mail.com', focusColor: primaryColor),
+                        hintText: 'Enter Email',
+                        hintStyle: TextStyle(color: grey),
+                        focusColor: primaryColor),
                     onChanged: (value) {
                       _formKey.currentState!.validate()
                           ? setState(() {
@@ -91,11 +94,15 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   TextFormField(
                     controller: _passwordController,
-                    validator: (input) =>
-                        input == null ? 'Password is Empty' : null,
+                    // validator: (input) => input!.isValidPassword()
+                    //     ? null
+                    //     : 'Password Is Incorrect',
+
+                    //    input == null ? 'Password is Empty' : null,
                     obscureText: isvisible,
                     decoration: InputDecoration(
-                        hintText: '****',
+                        hintText: 'Enter Password',
+                        hintStyle: TextStyle(color: grey),
                         suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
@@ -122,7 +129,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     },
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   InkWell(
                       onTap: () {
@@ -152,7 +159,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           }));
                         }),
                   ),
-                  const SizedBox(height: 240),
+                  const SizedBox(height: 170),
                   InkWell(
                     onTap: () {
                       Navigator.push(context,

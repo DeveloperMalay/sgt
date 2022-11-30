@@ -39,21 +39,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 imageUrl: 'assets/onboarding_img1.png',
                 iconImage: 'assets/search.png',
                 smallText: 'Geolocation',
-                bigText: 'SOMETHING',
+                bigText: 'DEMO',
                 descriptionText:
                     'Find trusted security guard in your own neighborhood to protect whatever you want'),
             BuildPages(
                 imageUrl: 'assets/onboarding_img2.png',
                 iconImage: 'assets/calendar.png',
                 smallText: 'Availability',
-                bigText: 'SOMETHING',
+                bigText: 'DEMO',
                 descriptionText:
                     'Determine the right time between you and the security guard with choices you cannot imagine before'),
             BuildPages(
                 imageUrl: 'assets/onboarding_img3.png',
                 iconImage: 'assets/shield.png',
                 smallText: 'Security',
-                bigText: 'SOMETHING',
+                bigText: 'DEMO',
                 descriptionText:
                     'Enjoy the right security and trust to protect your family, business and valuable assets'),
           ],

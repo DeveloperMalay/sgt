@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sgt/presentation/home_screen/widgets/circular_profile_widget.dart';
 import 'package:sgt/presentation/home_screen/widgets/location_details_card.dart';
 import 'package:sgt/presentation/jobs_screen/jobs_screen.dart';
+import 'package:sgt/presentation/work_report_screen/work_report_screen.dart';
 import 'package:sgt/utils/const.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -33,8 +34,10 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => JobsScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const WorkReportScreen()));
                 },
                 icon: Icon(
                   Icons.add,
@@ -83,13 +86,19 @@ class HomeScreen extends StatelessWidget {
                         color: black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold)),
-                const Text(
-                  'See all > ',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 15,
-                  ),
-                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const JobsScreen()));
+                  },
+                  child: const Text('See all > ',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15,
+                      )),
+                )
               ],
             ),
             const SizedBox(

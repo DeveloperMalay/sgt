@@ -127,7 +127,10 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                             children: const [
                               Text(
                                 '15',
-                                style: TextStyle(color: Colors.grey),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 'Guards',
@@ -142,7 +145,10 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                             children: const [
                               Text(
                                 '10',
-                                style: TextStyle(color: Colors.grey),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 'Points',
@@ -157,7 +163,10 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                             children: const [
                               Text(
                                 '70000',
-                                style: TextStyle(color: Colors.grey),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 'Sqft',
