@@ -73,7 +73,7 @@ class HomeScreen extends StatelessWidget {
               height: 110,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => CircularProfile()),
+                  itemBuilder: (context, index) => const CircularProfile()),
             ),
             const SizedBox(
               height: 20,
@@ -107,9 +107,10 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 1250,
               child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => LocationDetailsCard()),
+                physics: const NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) => const LocationDetailsCard(),
+              ),
             ),
           ]),
         ),

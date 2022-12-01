@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sgt/presentation/account_screen/account_screen.dart';
 import 'package:sgt/presentation/connect_screen/connect_screen.dart';
 import 'package:sgt/presentation/notification_screen/notification_screen.dart';
@@ -138,16 +139,21 @@ class _HomeState extends State<Home> {
                   label: 'Time Sheet',
                 ),
                 BottomNavigationBarItem(
-                  activeIcon: Icon(
-                    Icons.message_rounded,
+                  activeIcon: FaIcon(
+                    FontAwesomeIcons.solidComment,
                     size: 28,
                     color: primaryColor,
                   ),
-                  icon: const Icon(
-                    Icons.message_rounded,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.solidComment,
                     size: 28,
                     color: Colors.grey,
                   ),
+                  // icon: const Icon(
+                  //   Icons.message_rounded,
+                  //   size: 28,
+                  //   color: Colors.grey,
+                  // ),
                   label: 'Connect',
                 ),
                 BottomNavigationBarItem(
