@@ -202,14 +202,27 @@ class _ChattingScreenState extends State<ChattingScreen> {
                   fillColor: grey,
                   isDense: true,
                   contentPadding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                  border: OutlineInputBorder(
+                  enabledBorder: UnderlineInputBorder(
                     borderRadius: BorderRadius.circular(7),
-                    borderSide: BorderSide(
-                      color: grey,
-                    ),
+                    borderSide: BorderSide(color: grey),
                   ),
-                  focusedBorder:
-                      OutlineInputBorder(borderSide: BorderSide(color: grey)),
+                  // focusedBorder: UnderlineInputBorder(
+                  //   borderSide: BorderSide(color: grey),
+                  // ),
+                  border: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(7),
+                    borderSide: BorderSide(color: grey),
+                  ),
+
+                  // border: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(7),
+                  //   borderSide: BorderSide(
+                  //     color: white,
+                  //   ),
+                  // ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(7),
+                      borderSide: BorderSide(color: grey)),
                   hintText: 'Write a message',
                 ),
               ),
