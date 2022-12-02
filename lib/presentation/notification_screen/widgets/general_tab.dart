@@ -15,6 +15,7 @@ class _GeneralTabState extends State<GeneralTab> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: notificationdummydata.length,
         itemBuilder: (context, index) {
           return Column(

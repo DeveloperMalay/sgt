@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sgt/presentation/map_screen/map_screen.dart';
-import 'package:sgt/presentation/time_sheet_screen/widgets/check_points_widget.dart';
-
+import 'package:sgt/presentation/time_sheet_screen/widgets/upcoming_tab.dart';
 import '../../utils/const.dart';
+import 'widgets/completed_widget_tab.dart';
 
 class TimeSheetScreen extends StatelessWidget {
   const TimeSheetScreen({super.key});
@@ -10,156 +9,60 @@ class TimeSheetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: white,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: black,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+      body: SafeArea(
+        child: DefaultTabController(
+          length: 2,
+          child: SingleChildScrollView(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 60,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 16.0, bottom: 20),
+                child: Text(
+                  'Timesheet',
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TabBar(
+                      labelColor: black,
+                      unselectedLabelColor: Colors.grey,
+                      indicatorWeight: 4,
+                      indicatorColor: primaryColor,
+                      tabs: [
+                        Tab(
+                          icon: Text(
+                            'Upcoming',
+                            style: TextStyle(color: black, fontSize: 20),
+                          ),
+                        ),
+                        Tab(
+                          icon: Text(
+                            'Complete',
+                            style: TextStyle(color: black, fontSize: 20),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 900,
+                      child: TabBarView(children: [
+                        UpcomingWidgetTab(),
+                        CompletedWidgetTab(),
+                      ]),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )),
         ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const MapScreen()));
-              },
-              icon: Icon(
-                Icons.map,
-                color: black,
-              ))
-        ],
       ),
-      body: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              'Checkpoints',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                CheckPointWidget(
-                  iscompleted: true,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 100.0),
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                CheckPointWidget(
-                  iscompleted: true,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 100.0),
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                CheckPointWidget(
-                  iscompleted: false,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 100.0),
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                CheckPointWidget(
-                  iscompleted: false,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 100.0),
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                CheckPointWidget(
-                  iscompleted: false,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 100.0),
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                CheckPointWidget(
-                  iscompleted: false,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 100.0),
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                CheckPointWidget(
-                  iscompleted: false,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 100.0),
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                CheckPointWidget(
-                  iscompleted: false,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 100.0),
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      )),
     );
   }
 }
