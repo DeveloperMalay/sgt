@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sgt/presentation/connect_screen/widgets/chat_model.dart';
+import 'package:sgt/utils/const.dart';
 
 class CircularProfile extends StatelessWidget {
   const CircularProfile({super.key});
@@ -7,24 +9,31 @@ class CircularProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
-      child: Column(
-        children: const [
-          CircleAvatar(
-            radius: 30,
-            backgroundImage: NetworkImage(
-              'https://cdn2.iconfinder.com/data/icons/avatars-99/62/avatar-370-456322-512.png',
-            ),
-          ),
-          SizedBox(
-            width: 70,
-            child: Text(
-              'Gerard Fabiano',
-              softWrap: true,
-              textAlign: TextAlign.center,
-            ),
-          )
-        ],
-      ),
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: dummyData.length,
+          itemBuilder: (context, index) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: grey,
+                  backgroundImage: NetworkImage(
+                    dummyData[index].profileUrl,
+                  ),
+                ),
+                SizedBox(
+                  width: 70,
+                  child: Text(
+                    dummyData[index].name,
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              ],
+            );
+          }),
     );
   }
 }

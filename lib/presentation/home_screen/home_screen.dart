@@ -71,9 +71,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(
               height: 110,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => const CircularProfile()),
+              child: CircularProfile(),
             ),
             const SizedBox(
               height: 20,
