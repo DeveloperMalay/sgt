@@ -48,17 +48,23 @@ dependencies:
   dotted_border: ^2.0.0+3
   font_awesome_flutter: ^10.2.1
   flutter_vector_icons: ^2.0.0
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.11.0
 
+flutter_icons:
+   android: true
+   ios: true
+   image_path: 'assets/sgt_logo.jpg'
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  # flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -74,6 +80,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/sgt_logo.png
+    - assets/sgt_logo.jpg
     - assets/sgt_logo_dark.png
     - assets/onboarding_img1.png
     - assets/onboarding_img2.png

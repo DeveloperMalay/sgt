@@ -4,8 +4,6 @@ import 'package:sgt/presentation/authentication_screen/sign_in_screen.dart';
 import 'package:sgt/utils/const.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../home.dart';
-
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -39,21 +37,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 imageUrl: 'assets/onboarding_img1.png',
                 iconImage: 'assets/search.png',
                 smallText: 'Geolocation',
-                bigText: 'DEMO',
+                bigText: 'Tracking',
                 descriptionText:
                     'Find trusted security guard in your own neighborhood to protect whatever you want'),
             BuildPages(
                 imageUrl: 'assets/onboarding_img2.png',
                 iconImage: 'assets/calendar.png',
                 smallText: 'Availability',
-                bigText: 'DEMO',
+                bigText: 'Reliable',
                 descriptionText:
                     'Determine the right time between you and the security guard with choices you cannot imagine before'),
             BuildPages(
                 imageUrl: 'assets/onboarding_img3.png',
                 iconImage: 'assets/shield.png',
                 smallText: 'Security',
-                bigText: 'DEMO',
+                bigText: 'Guarding ',
                 descriptionText:
                     'Enjoy the right security and trust to protect your family, business and valuable assets'),
           ],

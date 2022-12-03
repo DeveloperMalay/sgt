@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sgt/helper/email_validator.dart';
+import 'package:sgt/presentation/authentication_screen/cubit/obscure/obscure_cubit.dart';
 import 'package:sgt/presentation/authentication_screen/forgot_password_screen.dart';
 import 'package:sgt/presentation/authentication_screen/sign_up_screen.dart';
 import 'package:sgt/presentation/home.dart';
@@ -19,7 +21,7 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
-  bool isvisible = false;
+
   bool isButtonActive = false;
   List<String> languages = [
     'English',
@@ -232,6 +234,14 @@ class _SignInScreenState extends State<SignInScreen> {
                           ? null
                           : " \u26A0 Email ID is Incorrect",
                       decoration: InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: primaryColor, width: 2),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: primaryColor, width: 2),
+                          ),
                           hintText: 'Enter Email',
                           hintStyle: TextStyle(color: grey, fontSize: 15),
                           focusColor: primaryColor),
@@ -258,17 +268,30 @@ class _SignInScreenState extends State<SignInScreen> {
                       //     : 'Password Is Incorrect',
 
                       //    input == null ? 'Password is Empty' : null,
-                      obscureText: isvisible,
+                      obscureText:
+                          BlocProvider.of<ObscureCubit>(context, listen: true)
+                              .state
+                              .isObscure,
                       decoration: InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: primaryColor, width: 2),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: primaryColor, width: 2),
+                          ),
                           hintText: 'Enter Password',
                           hintStyle: TextStyle(color: grey),
                           suffixIcon: IconButton(
                             onPressed: () {
-                              setState(() {
-                                isvisible = !isvisible;
-                              });
+                              BlocProvider.of<ObscureCubit>(context)
+                                  .changeVisibility();
                             },
-                            icon: isvisible
+                            icon: BlocProvider.of<ObscureCubit>(context,
+                                        listen: true)
+                                    .state
+                                    .isObscure
                                 ? const Icon(
                                     Icons.visibility_off_outlined,
                                     color: Colors.black,

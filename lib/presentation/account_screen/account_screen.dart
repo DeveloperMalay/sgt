@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sgt/presentation/settings_screen/settings_screen.dart';
 
 import '../../utils/const.dart';
 
@@ -9,6 +10,19 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: white, elevation: 0, actions: [
+        IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const SettingsScreen();
+              }));
+            },
+            icon: Icon(
+              Icons.settings,
+              color: black,
+            ))
+      ]),
+      backgroundColor: white,
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
@@ -17,7 +31,7 @@ class AccountScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 40,
+                height: 10,
               ),
               Center(
                 child: CircleAvatar(

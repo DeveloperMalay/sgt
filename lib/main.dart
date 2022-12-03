@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sgt/presentation/authentication_screen/cubit/obscure/obscure_cubit.dart';
 import 'package:sgt/utils/const.dart';
 import 'presentation/onboarding_screen/onboarding_screen.dart';
 
@@ -17,13 +19,16 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(360, 690),
         builder: (context, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'SGT',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
+          return BlocProvider(
+            create: (context) => ObscureCubit(),
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'SGT',
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              home: const SplashScreen(),
             ),
-            home: const SplashScreen(),
           );
         });
   }
@@ -56,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
             width: 250,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/sgt_logo.png"),
+                image: AssetImage("assets/sgt_logo.jpg"),
               ),
             ),
           ),

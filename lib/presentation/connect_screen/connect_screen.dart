@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sgt/presentation/connect_screen/widgets/chat_model.dart';
 import 'package:sgt/presentation/connect_screen/widgets/chatting_screen.dart';
 import '../../utils/const.dart';
@@ -175,7 +176,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
                                             )
                                           : Container(),
                                   SizedBox(
-                                    width: 160,
+                                    width: 150.w,
                                     child: Text(
                                       dummyData[index].messagetype == 'photo'
                                           ? 'Photo'

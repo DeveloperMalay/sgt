@@ -25,8 +25,8 @@ class BuildPages extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
           children: [
-            const SizedBox(
-              height: 50,
+            SizedBox(
+              height: 50.h,
             ),
             Image.asset(
               imageUrl,
@@ -34,20 +34,20 @@ class BuildPages extends StatelessWidget {
               height: 270.h,
               width: double.infinity,
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 20.h,
             ),
             Container(
-              height: 60,
-              width: 60,
+              height: 50.h,
+              width: 55.w,
               decoration: BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(50),
               ),
               child: Center(child: Image.asset(iconImage)),
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 20.h,
             ),
             Text(
               smallText,
@@ -56,8 +56,8 @@ class BuildPages extends StatelessWidget {
               ),
               textScaleFactor: 1.0,
             ),
-            const SizedBox(
-              height: 15,
+            SizedBox(
+              height: 10.h,
             ),
             Text(
               bigText,
@@ -67,8 +67,8 @@ class BuildPages extends StatelessWidget {
               ),
               textScaleFactor: 1.0,
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             Text(
               descriptionText,
