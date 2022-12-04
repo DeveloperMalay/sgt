@@ -45,31 +45,44 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const SizedBox(
-              height: 80,
+            SizedBox(
+              height: 30.h,
             ),
             Text(
               'New Password',
               textScaleFactor: 1.0,
               style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(color: Colors.grey, fontSize: 18.sp)),
+                  textStyle: TextStyle(color: Colors.grey, fontSize: 16.sp)),
             ),
             TextFormField(
               decoration: InputDecoration(
-                  hintText: '.......', focusColor: primaryColor),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: grey, width: 2),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: primaryColor, width: 2),
+                  ),
+                  hintText: '.......',
+                  focusColor: primaryColor),
             ),
-            const SizedBox(
-              height: 40,
+            SizedBox(
+              height: 30.h,
             ),
             Text(
               'Re-Enter New Password',
               textScaleFactor: 1.0,
               style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(color: Colors.grey, fontSize: 18.sp)),
+                  textStyle: TextStyle(color: Colors.grey, fontSize: 16.sp)),
             ),
             TextFormField(
               obscureText: isvisible,
               decoration: InputDecoration(
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: grey, width: 2),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: primaryColor, width: 2),
+                  ),
                   hintText: '.......',
                   focusColor: primaryColor,
                   suffixIcon: IconButton(
@@ -79,20 +92,20 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       });
                     },
                     icon: isvisible
-                        ? const Icon(
+                        ? Icon(
                             Icons.visibility_off_outlined,
                             color: Colors.black,
-                            size: 20,
+                            size: 20.sp,
                           )
-                        : const Icon(
+                        : Icon(
                             Icons.visibility_outlined,
                             color: Colors.black,
-                            size: 20,
+                            size: 20.sp,
                           ),
                   )),
             ),
-            const SizedBox(
-              height: 40,
+            SizedBox(
+              height: 40.h,
             ),
             Center(
               child: CupertinoButton(

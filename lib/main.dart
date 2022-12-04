@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sgt/presentation/authentication_screen/cubit/obscure/obscure_cubit.dart';
+import 'package:sgt/presentation/settings_screen/cubit/toggle_switch/toggleswitch_cubit.dart';
 import 'package:sgt/utils/const.dart';
 import 'presentation/onboarding_screen/onboarding_screen.dart';
 
@@ -19,8 +20,15 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(360, 690),
         builder: (context, child) {
-          return BlocProvider(
-            create: (context) => ObscureCubit(),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => ObscureCubit(),
+              ),
+              BlocProvider(
+                create: (context) => ToggleSwitchCubit(),
+              ),
+            ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'SGT',

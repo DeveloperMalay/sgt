@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sgt/presentation/authentication_screen/change_password_screen.dart';
+import 'package:sgt/presentation/settings_screen/languages_screen.dart';
+import 'package:sgt/presentation/settings_screen/privacy_policy_screen.dart';
+import 'package:sgt/presentation/settings_screen/terms_&_Condition_screen.dart';
 
 import '../../utils/const.dart';
+import 'cubit/toggle_switch/toggleswitch_cubit.dart';
+import 'edit_account_details_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -14,25 +22,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool isSwitched = false;
-  var textValue = 'Switch is OFF';
-
-  void toggleSwitch(boolvalue) {
-    if (isSwitched == false) {
-      setState(() {
-        isSwitched = true;
-        textValue = 'SwitchButton is ON';
-      });
-      print('SwitchButton is ON');
-    } else {
-      setState(() {
-        isSwitched = false;
-        textValue = 'SwitchButton is OFF';
-      });
-      print('SwitchButton is OFF');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,10 +53,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(
-              height: 20,
+              height: 20.h,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0),
+              padding: const EdgeInsets.only(left: 10.0),
               child: Text(
                 'Account',
                 style: GoogleFonts.montserrat(
@@ -78,12 +67,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 20.h,
             ),
             ListTile(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const ChangePasswordScreen();
+                }));
+              },
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               leading: Container(
-                  height: 34,
-                  width: 34,
+                  height: 30.h,
+                  width: 34.w,
                   padding: EdgeInsets.all(3),
                   decoration: BoxDecoration(
                       color: primaryColor,
@@ -91,7 +86,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Icon(
                     Icons.lock,
                     color: white,
-                    size: 20,
+                    size: 20.sp,
                   )),
               title: Text(
                 'Change Password',
@@ -106,13 +101,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 72.0),
               child: Divider(
+                height: 0,
                 color: Colors.grey,
               ),
             ),
             ListTile(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const EditAccountScreen();
+                }));
+              },
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               leading: Container(
-                  height: 34,
-                  width: 34,
+                  height: 30.h,
+                  width: 34.w,
                   decoration: BoxDecoration(
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(5)),
@@ -120,7 +122,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Icon(
                       Icons.person,
                       color: white,
-                      size: 20,
+                      size: 20.sp,
                     ),
                   )),
               title: Text(
@@ -136,13 +138,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 72.0),
               child: Divider(
+                height: 0,
                 color: Colors.grey,
               ),
             ),
             ListTile(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const TermsandConditionScreen();
+                }));
+              },
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               leading: Container(
-                  height: 34,
-                  width: 34,
+                  height: 30.h,
+                  width: 34.w,
                   decoration: BoxDecoration(
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(5)),
@@ -150,7 +159,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Icon(
                       Icons.collections,
                       color: white,
-                      size: 20,
+                      size: 20.sp,
                     ),
                   )),
               title: Text(
@@ -166,13 +175,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 72.0),
               child: Divider(
+                height: 0,
                 color: Colors.grey,
               ),
             ),
             ListTile(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const PrivacyPolicyScreen();
+                }));
+              },
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               leading: Container(
-                height: 34,
-                width: 34,
+                height: 30.h,
+                width: 34.w,
                 padding: EdgeInsets.all(3),
                 decoration: BoxDecoration(
                     color: primaryColor,
@@ -181,7 +197,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: FaIcon(
                     FontAwesomeIcons.solidHand,
                     color: white,
-                    size: 20,
+                    size: 20.sp,
                   ),
                 ),
               ),
@@ -198,13 +214,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 72.0),
               child: Divider(
+                height: 0,
                 color: Colors.grey,
               ),
             ),
             ListTile(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const LanguagesScreen();
+                }));
+              },
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               leading: Container(
-                height: 34,
-                width: 34,
+                height: 30.h,
+                width: 34.w,
                 decoration: BoxDecoration(
                     color: primaryColor,
                     borderRadius: BorderRadius.circular(5)),
@@ -212,7 +235,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Icon(
                     Fontisto.world_o,
                     color: white,
-                    size: 20,
+                    size: 20.sp,
                   ),
                 ),
               ),
@@ -229,13 +252,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 72.0),
               child: Divider(
+                height: 0,
                 color: Colors.grey,
               ),
             ),
             ListTile(
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               leading: Container(
-                height: 34,
-                width: 34,
+                height: 30.h,
+                width: 34.w,
                 // padding: EdgeInsets.all(3),
                 decoration: BoxDecoration(
                     color: primaryColor,
@@ -244,7 +269,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: FaIcon(
                     FontAwesomeIcons.solidHand,
                     color: white,
-                    size: 20,
+                    size: 20.sp,
                   ),
                 ),
               ),
@@ -266,13 +291,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 72.0),
               child: Divider(
+                height: 0,
                 color: Colors.grey,
               ),
             ),
             ListTile(
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               leading: Container(
-                  height: 34,
-                  width: 34,
+                  height: 30.h,
+                  width: 34.w,
                   decoration: BoxDecoration(
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(5)),
@@ -280,7 +307,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Icon(
                       Icons.logout,
                       color: white,
-                      size: 20,
+                      size: 20.sp,
                     ),
                   )),
               title: Text(
@@ -296,14 +323,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 72.0),
               child: Divider(
+                height: 0,
                 color: Colors.grey,
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 20.h,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0),
+              padding: const EdgeInsets.only(left: 10.0),
               child: Text(
                 'Notification Alert ',
                 style: GoogleFonts.montserrat(
@@ -314,7 +342,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 17),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -326,20 +354,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Colors.black,
                     )),
                   ),
-                  Switch(
-                    onChanged: toggleSwitch,
-                    value: isSwitched,
-                    activeColor: grey,
-                    activeTrackColor: primaryColor,
-                    inactiveThumbColor: primaryColor,
-                    inactiveTrackColor: grey,
-                  )
+                  FlutterSwitch(
+                    switchBorder: Border.all(
+                      color: primaryColor,
+                      width: 2.0.w,
+                    ),
+                    activeColor: primaryColor,
+                    inactiveColor: white,
+                    inactiveToggleColor: primaryColor,
+                    width: 51.0.w,
+                    height: 26.0.h,
+                    toggleSize: 23.0.sp,
+                    value: BlocProvider.of<ToggleSwitchCubit>(context,
+                            listen: true)
+                        .state
+                        .isSwitched,
+                    borderRadius: 30.0,
+                    padding: 2.0,
+                    onToggle: (val) {
+                      BlocProvider.of<ToggleSwitchCubit>(context)
+                          .changingToggleSwitch();
+                    },
+                  ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 18.0),
+              padding: const EdgeInsets.only(left: 10.0),
               child: Divider(
+                height: 30.h,
                 color: Colors.grey,
               ),
             ),
