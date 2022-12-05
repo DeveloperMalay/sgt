@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sgt/presentation/qr_screen/scanning_screen.dart';
 import '../../utils/const.dart';
 
 class QrScreen extends StatefulWidget {
@@ -78,8 +79,11 @@ class _QrScreenState extends State<QrScreen> {
                     'Take a photo',
                     style: TextStyle(fontSize: 15.sp),
                   ),
-                  onPressed: () async {
-                  
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const ScanningScreen();
+                    }));
                   }),
             ),
           ],
