@@ -10,6 +10,7 @@ class CircularProfile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: ListView.builder(
+          physics: BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           itemCount: dummyData.length,
           itemBuilder: (context, index) {

@@ -27,162 +27,169 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        final shouldPop = await showDialog<bool>(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('Do you want to go close the app?'),
-              actionsAlignment: MainAxisAlignment.spaceBetween,
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, false);
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 40,
-                    padding: const EdgeInsets.only(
-                      top: 6,
-                      left: 10,
-                    ),
-                    decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(4)),
-                    child: const Text(
-                      "No",
-                      style: TextStyle(
-                        color: Colors.white,
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+      child: WillPopScope(
+        onWillPop: () async {
+          final shouldPop = await showDialog<bool>(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Do you want to go close the app?',
+                    textScaleFactor: 1.0),
+                actionsAlignment: MainAxisAlignment.spaceBetween,
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 40,
+                      padding: const EdgeInsets.only(
+                        top: 6,
+                        left: 10,
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(4)),
+                      child: const Text(
+                        "No",
+                        textScaleFactor: 1.0,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, true);
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 40,
-                    padding: const EdgeInsets.only(
-                      top: 6,
-                      left: 8,
-                    ),
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(4)),
-                    child: const Text(
-                      "Yes",
-                      style: TextStyle(
-                        color: Colors.white,
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 40,
+                      padding: const EdgeInsets.only(
+                        top: 6,
+                        left: 8,
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(4)),
+                      child: const Text(
+                        "Yes",
+                        textScaleFactor: 1.0,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            );
-          },
-        );
-        return shouldPop!;
-      },
-      child: MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-        child: Scaffold(
-          body: currentWidget[_selectedIndex],
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              // borderRadius: BorderRadius.only(
-              //     topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-              // boxShadow: <BoxShadow>[
-              //   BoxShadow(
-              //     color: Colors.black,
-              //     blurRadius: 10,
-              //   ),
-              //],
-            ),
-            child: BottomNavigationBar(
-              elevation: 20,
-              currentIndex: _selectedIndex,
-              selectedItemColor: primaryColor,
-              selectedLabelStyle: TextStyle(color: primaryColor, fontSize: 13),
-              type: BottomNavigationBarType.fixed,
-              onTap: (index) => setState(() {
-                _selectedIndex = index;
-              }),
-              items: [
-                BottomNavigationBarItem(
-                  activeIcon: Icon(
-                    Icons.home,
-                    size: 28,
-                    color: primaryColor,
+                ],
+              );
+            },
+          );
+          return shouldPop!;
+        },
+        child: MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: Scaffold(
+            body: currentWidget[_selectedIndex],
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                // borderRadius: BorderRadius.only(
+                //     topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                // boxShadow: <BoxShadow>[
+                //   BoxShadow(
+                //     color: Colors.black,
+                //     blurRadius: 10,
+                //   ),
+                //],
+              ),
+              child: BottomNavigationBar(
+                elevation: 20,
+                currentIndex: _selectedIndex,
+                selectedItemColor: primaryColor,
+                selectedLabelStyle:
+                    TextStyle(color: primaryColor, fontSize: 13),
+                type: BottomNavigationBarType.fixed,
+                onTap: (index) => setState(() {
+                  _selectedIndex = index;
+                }),
+                items: [
+                  BottomNavigationBarItem(
+                    activeIcon: Icon(
+                      Icons.home,
+                      size: 28,
+                      color: primaryColor,
+                    ),
+                    icon: const Icon(
+                      Icons.home,
+                      size: 28,
+                      color: Colors.grey,
+                    ),
+                    label: 'Home',
                   ),
-                  icon: const Icon(
-                    Icons.home,
-                    size: 28,
-                    color: Colors.grey,
+                  BottomNavigationBarItem(
+                    activeIcon: Icon(
+                      Icons.receipt_long_rounded,
+                      size: 28,
+                      color: primaryColor,
+                    ),
+                    icon: const Icon(
+                      Icons.receipt_long_rounded,
+                      size: 28,
+                      color: Colors.grey,
+                    ),
+                    label: 'Time Sheet',
                   ),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  activeIcon: Icon(
-                    Icons.receipt_long_rounded,
-                    size: 28,
-                    color: primaryColor,
+                  BottomNavigationBarItem(
+                    activeIcon: FaIcon(
+                      FontAwesomeIcons.solidComment,
+                      size: 28,
+                      color: primaryColor,
+                    ),
+                    icon: const FaIcon(
+                      FontAwesomeIcons.solidComment,
+                      size: 28,
+                      color: Colors.grey,
+                    ),
+                    // icon: const Icon(
+                    //   Icons.message_rounded,
+                    //   size: 28,
+                    //   color: Colors.grey,
+                    // ),
+                    label: 'Connect',
                   ),
-                  icon: const Icon(
-                    Icons.receipt_long_rounded,
-                    size: 28,
-                    color: Colors.grey,
+                  BottomNavigationBarItem(
+                    activeIcon: Icon(
+                      Icons.notifications,
+                      size: 28,
+                      color: primaryColor,
+                    ),
+                    icon: const Icon(
+                      Icons.notifications,
+                      size: 28,
+                      color: Colors.grey,
+                    ),
+                    label: 'Notifications',
                   ),
-                  label: 'Time Sheet',
-                ),
-                BottomNavigationBarItem(
-                  activeIcon: FaIcon(
-                    FontAwesomeIcons.solidComment,
-                    size: 28,
-                    color: primaryColor,
+                  BottomNavigationBarItem(
+                    activeIcon: Icon(
+                      Icons.person,
+                      size: 28,
+                      color: primaryColor,
+                    ),
+                    icon: Icon(
+                      Icons.person,
+                      size: 28,
+                      color: Colors.grey,
+                    ),
+                    label: 'Account',
                   ),
-                  icon: const FaIcon(
-                    FontAwesomeIcons.solidComment,
-                    size: 28,
-                    color: Colors.grey,
-                  ),
-                  // icon: const Icon(
-                  //   Icons.message_rounded,
-                  //   size: 28,
-                  //   color: Colors.grey,
-                  // ),
-                  label: 'Connect',
-                ),
-                BottomNavigationBarItem(
-                  activeIcon: Icon(
-                    Icons.notifications,
-                    size: 28,
-                    color: primaryColor,
-                  ),
-                  icon: const Icon(
-                    Icons.notifications,
-                    size: 28,
-                    color: Colors.grey,
-                  ),
-                  label: 'Notifications',
-                ),
-                BottomNavigationBarItem(
-                  activeIcon: Icon(
-                    Icons.person,
-                    size: 28,
-                    color: primaryColor,
-                  ),
-                  icon: Icon(
-                    Icons.person,
-                    size: 28,
-                    color: Colors.grey,
-                  ),
-                  label: 'Account',
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

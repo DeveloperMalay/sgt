@@ -70,10 +70,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           children: [
                                             const Text(
                                               'Select Media From?',
+                                              textScaleFactor: 1.0,
                                               style: TextStyle(fontSize: 16),
                                             ),
                                             const Text(
                                               'Use camera or select file from device gallery',
+                                              textScaleFactor: 1.0,
                                               style: TextStyle(
                                                   fontSize: 12,
                                                   color: Color.fromARGB(
@@ -105,7 +107,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                     const SizedBox(
                                                       height: 8,
                                                     ),
-                                                    const Text('Camera')
+                                                    const Text(
+                                                      'Camera',
+                                                      textScaleFactor: 1.0,
+                                                    )
                                                   ],
                                                 ),
                                                 Column(
@@ -139,7 +144,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                     const SizedBox(
                                                       height: 8,
                                                     ),
-                                                    const Text('Gallery')
+                                                    const Text(
+                                                      'Gallery',
+                                                      textScaleFactor: 1.0,
+                                                    )
                                                   ],
                                                 )
                                               ],

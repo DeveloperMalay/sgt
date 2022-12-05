@@ -26,7 +26,7 @@ class BuildPages extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 50.h,
+              height: 45.h,
             ),
             Image.asset(
               imageUrl,
@@ -35,7 +35,7 @@ class BuildPages extends StatelessWidget {
               width: double.infinity,
             ),
             SizedBox(
-              height: 20.h,
+              height: 10.h,
             ),
             Container(
               height: 50.h,
@@ -47,7 +47,7 @@ class BuildPages extends StatelessWidget {
               child: Center(child: Image.asset(iconImage)),
             ),
             SizedBox(
-              height: 20.h,
+              height: 18.h,
             ),
             Text(
               smallText,

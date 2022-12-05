@@ -313,7 +313,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       height: 7,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 200.0, right: 0),
+                      padding: EdgeInsets.only(left: 190.w, right: 0),
                       child: InkWell(
                           onTap: () {
                             Navigator.push(context,
@@ -324,8 +324,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: Text('Forgot password',
                               textScaleFactor: 1.0,
                               style: GoogleFonts.montserrat(
-                                  textStyle:
-                                      const TextStyle(color: Colors.blue)))),
+                                  textStyle: TextStyle(
+                                      color: Colors.blue, fontSize: 12.sp)))),
                     ),
                     SizedBox(
                       height: 80.h,
@@ -333,14 +333,14 @@ class _SignInScreenState extends State<SignInScreen> {
                     Center(
                       child: CupertinoButton(
                           disabledColor: seconderyColor,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 130, vertical: 15),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 120.w, vertical: 15),
                           color: primaryColor,
                           child: Text(
                             'Sign In',
                             textScaleFactor: 1.0,
                             style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(fontSize: 17.sp)),
+                                textStyle: TextStyle(fontSize: 15.sp)),
                           ),
                           onPressed: () {
                             Navigator.push(context,

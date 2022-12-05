@@ -153,30 +153,30 @@ class _ConnectScreenState extends State<ConnectScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   dummyData[index].messagetype == 'not_send'
-                                      ? const Icon(
+                                      ? Icon(
                                           Icons.av_timer,
-                                          size: 17,
+                                          size: 17.sp,
                                         )
                                       : Icon(
                                           Icons.done_all_outlined,
-                                          size: 17,
+                                          size: 17.sp,
                                           color: dummyData[index].ismessageSeen
                                               ? primaryColor
                                               : Colors.grey,
                                         ),
                                   dummyData[index].messagetype == 'photo'
-                                      ? const Icon(
+                                      ? Icon(
                                           Icons.photo,
-                                          size: 17,
+                                          size: 16.sp,
                                         )
                                       : dummyData[index].messagetype == 'video'
-                                          ? const Icon(
+                                          ? Icon(
                                               Icons.videocam,
-                                              size: 17,
+                                              size: 16.sp,
                                             )
                                           : Container(),
                                   SizedBox(
-                                    width: 150.w,
+                                    width: 140.w,
                                     child: Text(
                                       dummyData[index].messagetype == 'photo'
                                           ? 'Photo'
@@ -196,8 +196,8 @@ class _ConnectScreenState extends State<ConnectScreen> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                         trailing: SizedBox(
-                          height: 60,
-                          width: 70,
+                          height: 60.h,
+                          width: 64.w,
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisSize: MainAxisSize.min,
