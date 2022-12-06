@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sgt/presentation/connect_screen/cubit/islongpressed/islongpress_cubit.dart';
 import 'package:sgt/presentation/connect_screen/widgets/chat_model.dart';
 import 'package:sgt/presentation/connect_screen/widgets/chatting_screen.dart';
 import '../../utils/const.dart';
@@ -21,41 +23,55 @@ class _ConnectScreenState extends State<ConnectScreen> {
         elevation: 0,
         leadingWidth: 0,
         backgroundColor: white,
-        title: isSearching
-            ? Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: grey,
-                      isDense: true,
-                      contentPadding: const EdgeInsets.fromLTRB(30, 5, 30, 0),
-                      prefixIcon: Icon(
-                        Icons.arrow_back_ios,
-                        color: black,
-                        size: 25,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(7),
-                        borderSide: const BorderSide(
-                            color: Colors.transparent, width: 0.0),
-                      ),
-                      hintText: 'Search',
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isSearching = !isSearching;
-                          });
-                        },
-                        icon: Icon(
-                          Icons.search,
-                          size: 25,
-                          color: black,
-                        ),
-                      )),
-                ),
-              )
-            : Container(),
+        title: BlocProvider.of<IslongpressCubit>(context, listen: true)
+                .state
+                .islongpressed
+            ? Container()
+            : isSearching
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: grey,
+                          isDense: true,
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(30, 5, 30, 0),
+                          prefixIcon: Icon(
+                            Icons.arrow_back_ios,
+                            color: black,
+                            size: 25,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(7),
+                            borderSide: const BorderSide(
+                                color: Colors.transparent, width: 0.0),
+                          ),
+                          hintText: 'Search',
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isSearching = !isSearching;
+                              });
+                            },
+                            icon: BlocProvider.of<IslongpressCubit>(context,
+                                        listen: true)
+                                    .state
+                                    .islongpressed
+                                ? Icon(
+                                    Icons.delete,
+                                    size: 25,
+                                    color: black,
+                                  )
+                                : Icon(
+                                    Icons.search,
+                                    size: 25,
+                                    color: black,
+                                  ),
+                          )),
+                    ),
+                  )
+                : Container(),
         actions: [
           isSearching
               ? Container()
@@ -81,20 +97,29 @@ class _ConnectScreenState extends State<ConnectScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 16.0, bottom: 10),
-              child: Text(
-                'Connect',
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, bottom: 10),
-              child: Text(
-                'Chats',
-                style: TextStyle(color: black, fontSize: 20),
-              ),
-            ),
+            BlocProvider.of<IslongpressCubit>(context, listen: true)
+                    .state
+                    .islongpressed
+                ? Container()
+                : const Padding(
+                    padding: EdgeInsets.only(left: 16.0, bottom: 10),
+                    child: Text(
+                      'Connect',
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+            BlocProvider.of<IslongpressCubit>(context, listen: true)
+                    .state
+                    .islongpressed
+                ? Container()
+                : Padding(
+                    padding: const EdgeInsets.only(left: 16.0, bottom: 10),
+                    child: Text(
+                      'Chats',
+                      style: TextStyle(color: black, fontSize: 20),
+                    ),
+                  ),
             Divider(
               thickness: 3,
               color: primaryColor,
@@ -109,6 +134,16 @@ class _ConnectScreenState extends State<ConnectScreen> {
                   itemBuilder: (context, index) => Column(
                     children: [
                       ListTile(
+                        tileColor: BlocProvider.of<IslongpressCubit>(context,
+                                    listen: true)
+                                .state
+                                .islongpressed
+                            ? seconderyColor
+                            : null,
+                        onLongPress: () {
+                          BlocProvider.of<IslongpressCubit>(context)
+                              .longpressed();
+                        },
                         onTap: () {
                           Navigator.push(
                               context,

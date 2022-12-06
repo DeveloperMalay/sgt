@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sgt/presentation/authentication_screen/cubit/obscure/obscure_cubit.dart';
 import 'package:sgt/presentation/settings_screen/cubit/toggle_switch/toggleswitch_cubit.dart';
 import 'package:sgt/utils/const.dart';
+import 'presentation/connect_screen/cubit/islongpressed/islongpress_cubit.dart';
 import 'presentation/onboarding_screen/onboarding_screen.dart';
 
 void main() {
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
               BlocProvider(
                 create: (context) => ToggleSwitchCubit(),
               ),
+              BlocProvider(create: (context) => IslongpressCubit())
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
