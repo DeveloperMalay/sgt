@@ -6,7 +6,10 @@ part 'islongpress_state.dart';
 class IslongpressCubit extends Cubit<IslongpressState> {
   IslongpressCubit() : super(IslongpressState.initial());
 
-  void longpressed() {
-    emit(state.copyWith(islongpressed: !state.islongpressed));
+  void longpressed(String index) {
+    emit(state.copyWith(
+        islongpressed: !state.islongpressed, pressedindex: index));
+    print(state.pressedindex);
+    print(index);
   }
 }

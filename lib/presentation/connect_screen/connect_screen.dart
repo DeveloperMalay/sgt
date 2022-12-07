@@ -139,7 +139,11 @@ class _ConnectScreenState extends State<ConnectScreen> {
             ),
             SingleChildScrollView(
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * 3.56 / 5,
+                height: BlocProvider.of<IslongpressCubit>(context, listen: true)
+                        .state
+                        .islongpressed
+                    ? MediaQuery.of(context).size.height * 4 / 5
+                    : MediaQuery.of(context).size.height * 3.56 / 5,
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   physics: const BouncingScrollPhysics(),
@@ -148,14 +152,21 @@ class _ConnectScreenState extends State<ConnectScreen> {
                     children: [
                       ListTile(
                         tileColor: BlocProvider.of<IslongpressCubit>(context,
-                                    listen: true)
-                                .state
-                                .islongpressed
+                                        listen: true)
+                                    .state
+                                    .islongpressed &&
+                                BlocProvider.of<IslongpressCubit>(context,
+                                            listen: false)
+                                        .state
+                                        .pressedindex ==
+                                    index.toString()
                             ? seconderyColor
                             : null,
                         onLongPress: () {
                           BlocProvider.of<IslongpressCubit>(context)
-                              .longpressed();
+                              .longpressed(index.toString());
+                          print(
+                              'from cubit index --->${BlocProvider.of<IslongpressCubit>(context, listen: false).state.pressedindex}');
                         },
                         onTap: () {
                           Navigator.push(
@@ -279,7 +290,10 @@ class _ConnectScreenState extends State<ConnectScreen> {
                       BlocProvider.of<IslongpressCubit>(context, listen: true)
                               .state
                               .islongpressed
-                          ? Container()
+                          ? Divider(
+                              height: 0,
+                              color: Colors.grey,
+                            )
                           : const Padding(
                               padding: EdgeInsets.only(left: 90.0),
                               child: Divider(

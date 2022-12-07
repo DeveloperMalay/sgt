@@ -16,7 +16,7 @@ class SentMessageScreen extends StatelessWidget {
     final messageTextGroup = Flexible(
         child: InkWell(
       onLongPress: () {
-        BlocProvider.of<IslongpressCubit>(context).longpressed();
+        //  BlocProvider.of<IslongpressCubit>(context).longpressed();
 
         showDialog(
             context: context,
