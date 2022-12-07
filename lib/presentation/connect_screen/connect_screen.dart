@@ -19,79 +19,92 @@ class _ConnectScreenState extends State<ConnectScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leadingWidth: 0,
-        backgroundColor: white,
-        title: BlocProvider.of<IslongpressCubit>(context, listen: true)
-                .state
-                .islongpressed
-            ? Container()
-            : isSearching
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: grey,
-                          isDense: true,
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(30, 5, 30, 0),
-                          prefixIcon: Icon(
-                            Icons.arrow_back_ios,
-                            color: black,
-                            size: 25,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(7),
-                            borderSide: const BorderSide(
-                                color: Colors.transparent, width: 0.0),
-                          ),
-                          hintText: 'Search',
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                isSearching = !isSearching;
-                              });
-                            },
-                            icon: BlocProvider.of<IslongpressCubit>(context,
-                                        listen: true)
-                                    .state
-                                    .islongpressed
-                                ? Icon(
-                                    Icons.delete,
-                                    size: 25,
-                                    color: black,
-                                  )
-                                : Icon(
-                                    Icons.search,
-                                    size: 25,
-                                    color: black,
-                                  ),
-                          )),
-                    ),
-                  )
-                : Container(),
-        actions: [
-          isSearching
-              ? Container()
-              : Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isSearching = !isSearching;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.search,
-                      color: black,
-                      size: 35,
-                    ),
-                  ),
+      appBar: BlocProvider.of<IslongpressCubit>(context, listen: true)
+              .state
+              .islongpressed
+          ? AppBar(
+              elevation: 0,
+              leadingWidth: 0,
+              backgroundColor: white,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: black,
                 ),
-        ],
-      ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              actions: [
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.delete_outline,
+                      color: black,
+                      size: 25,
+                    ))
+              ],
+            )
+          : AppBar(
+              elevation: 0,
+              leadingWidth: 0,
+              backgroundColor: white,
+              title: isSearching
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: grey,
+                            isDense: true,
+                            contentPadding:
+                                const EdgeInsets.fromLTRB(30, 5, 30, 0),
+                            prefixIcon: Icon(
+                              Icons.arrow_back_ios,
+                              color: black,
+                              size: 25,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(7),
+                              borderSide: const BorderSide(
+                                  color: Colors.transparent, width: 0.0),
+                            ),
+                            hintText: 'Search',
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  isSearching = !isSearching;
+                                });
+                              },
+                              icon: Icon(
+                                Icons.search,
+                                size: 25,
+                                color: black,
+                              ),
+                            )),
+                      ),
+                    )
+                  : Container(),
+              actions: [
+                isSearching
+                    ? Container()
+                    : Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isSearching = !isSearching;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.search,
+                            color: black,
+                            size: 35,
+                          ),
+                        ),
+                      ),
+              ],
+            ),
       backgroundColor: white,
       body: SingleChildScrollView(
         child: Column(
@@ -263,12 +276,16 @@ class _ConnectScreenState extends State<ConnectScreen> {
                               ]),
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 90.0),
-                        child: Divider(
-                          color: Colors.grey,
-                        ),
-                      )
+                      BlocProvider.of<IslongpressCubit>(context, listen: true)
+                              .state
+                              .islongpressed
+                          ? Container()
+                          : const Padding(
+                              padding: EdgeInsets.only(left: 90.0),
+                              child: Divider(
+                                color: Colors.grey,
+                              ),
+                            )
                     ],
                   ),
                 ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sgt/presentation/connect_screen/widgets/custom_shape.dart';
 import 'package:sgt/utils/const.dart';
+import '../cubit/islongpressed/islongpress_cubit.dart';
 
 class SentMessageScreen extends StatelessWidget {
   final String message;
@@ -14,30 +16,101 @@ class SentMessageScreen extends StatelessWidget {
     final messageTextGroup = Flexible(
         child: InkWell(
       onLongPress: () {
+        BlocProvider.of<IslongpressCubit>(context).longpressed();
+
         showDialog(
             context: context,
             builder: (context) {
               return AlertDialog(
-                content: Container(
-                  height: 140,
-                  width: 333,
-                  child: Column(children: [
-                    Text('Delete media?'),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Delete media?',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       'Are you sure you want to delete this media?',
                       textAlign: TextAlign.center,
+                      textScaleFactor: 1.0,
+                      style: TextStyle(fontSize: 15, color: Colors.grey),
+                    ),
+                    SizedBox(
+                      height: 20,
                     ),
                     Divider(
                       color: Colors.grey,
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(),
-                        )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                color: white,
+                                border: Border.all(color: primaryColor),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Cencel',
+                                  textScaleFactor: 1.0,
+                                  style: TextStyle(color: primaryColor),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 70,
+                          ),
+                          Container(
+                            height: 40,
+                            width: 1,
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 65,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                color: primaryColor,
+                                border: Border.all(color: primaryColor),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Delete',
+                                  textScaleFactor: 1.0,
+                                  style: TextStyle(color: white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     )
-                  ]),
+                  ],
                 ),
               );
             });

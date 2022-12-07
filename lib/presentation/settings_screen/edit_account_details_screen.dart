@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pinput/pinput.dart';
 import '../../utils/const.dart';
 
@@ -17,6 +18,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   final pinController = TextEditingController();
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
+  final ImagePicker _picker = ImagePicker();
   TextEditingController _otpController = TextEditingController();
   @override
   void dispose() {
@@ -130,66 +132,102 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
                                             children: [
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    height: 60,
-                                                    width: 60,
-                                                    decoration: BoxDecoration(
-                                                      color: grey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
+                                              InkWell(
+                                                onTap: () async {
+                                                  // Capture a photo
+                                                  final XFile? photo =
+                                                      await _picker.pickImage(
+                                                          source: ImageSource
+                                                              .camera);
+
+                                                  // Capture a video
+                                                  final XFile? video =
+                                                      await _picker.pickVideo(
+                                                          source: ImageSource
+                                                              .camera);
+                                                },
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      height: 60,
+                                                      width: 60,
+                                                      decoration: BoxDecoration(
+                                                        color: grey,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                      ),
+                                                      child: const Icon(
+                                                        Icons.camera_alt,
+                                                        size: 30,
+                                                      ),
                                                     ),
-                                                    child: const Icon(
-                                                      Icons.camera_alt,
-                                                      size: 30,
+                                                    const SizedBox(
+                                                      height: 8,
                                                     ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  const Text(
-                                                    'Camera',
-                                                    textScaleFactor: 1.0,
-                                                  )
-                                                ],
+                                                    const Text(
+                                                      'Camera',
+                                                      textScaleFactor: 1.0,
+                                                    )
+                                                  ],
+                                                ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    height: 60,
-                                                    width: 60,
-                                                    decoration: BoxDecoration(
-                                                      color: white,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.grey
-                                                              .withOpacity(0.5),
-                                                          spreadRadius: 5,
-                                                          blurRadius: 7,
-                                                          offset: const Offset(
-                                                              0,
-                                                              3), // changes position of shadow
-                                                        ),
-                                                      ],
+                                              InkWell(
+                                                onTap: () async {
+                                                  // Pick an image
+                                                  final XFile? image =
+                                                      await _picker.pickImage(
+                                                          source: ImageSource
+                                                              .gallery);
+
+                                                  // Pick a video
+                                                  final XFile? video =
+                                                      await _picker.pickVideo(
+                                                          source: ImageSource
+                                                              .gallery);
+
+                                                  // Pick multiple images
+                                                  final List<XFile>? images =
+                                                      await _picker
+                                                          .pickMultiImage();
+                                                },
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      height: 60,
+                                                      width: 60,
+                                                      decoration: BoxDecoration(
+                                                        color: white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    0.5),
+                                                            spreadRadius: 5,
+                                                            blurRadius: 7,
+                                                            offset: const Offset(
+                                                                0,
+                                                                3), // changes position of shadow
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: const Icon(
+                                                        Icons.photo_outlined,
+                                                        size: 30,
+                                                      ),
                                                     ),
-                                                    child: const Icon(
-                                                      Icons.photo_outlined,
-                                                      size: 30,
+                                                    const SizedBox(
+                                                      height: 8,
                                                     ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  const Text(
-                                                    'Gallery',
-                                                    textScaleFactor: 1.0,
-                                                  )
-                                                ],
+                                                    const Text(
+                                                      'Gallery',
+                                                      textScaleFactor: 1.0,
+                                                    )
+                                                  ],
+                                                ),
                                               )
                                             ],
                                           ),
