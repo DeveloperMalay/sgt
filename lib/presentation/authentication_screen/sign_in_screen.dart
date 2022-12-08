@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sgt/helper/email_validator.dart';
+import 'package:sgt/helper/validator.dart';
 import 'package:sgt/presentation/authentication_screen/cubit/obscure/obscure_cubit.dart';
 import 'package:sgt/presentation/authentication_screen/forgot_password_screen.dart';
 import 'package:sgt/presentation/authentication_screen/sign_up_screen.dart';
@@ -21,7 +21,8 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
-
+  bool iseamilvalid = true;
+  bool ispasswordvalid = true;
   bool isButtonActive = false;
   List<String> languages = [
     'English',
@@ -230,13 +231,13 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     TextFormField(
                       controller: _emailController,
-                      validator: (input) => input!.isValidEmail()
-                          ? null
-                          : " \u26A0 Email ID is Incorrect",
+                      // validator: (input) => input!.isValidEmail()
+                      //     ? null
+                      //     : " \u26A0 Email ID is Incorrect",
                       decoration: InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                             borderSide:
-                                BorderSide(color: primaryColor, width: 2),
+                                BorderSide(color: Colors.grey, width: 2),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide:
@@ -246,11 +247,14 @@ class _SignInScreenState extends State<SignInScreen> {
                           hintStyle: TextStyle(color: grey, fontSize: 15),
                           focusColor: primaryColor),
                       onChanged: (value) {
-                        _formKey.currentState!.validate()
-                            ? setState(() {
-                                isButtonActive = !isButtonActive;
-                              })
-                            : null;
+                        setState(() {
+                          iseamilvalid = value.isValidEmail;
+                        });
+                        // _formKey.currentState!.validate()
+                        //     ? setState(() {
+                        //         isButtonActive = !isButtonActive;
+                        //       })
+                        //     : null;
                       },
                     ),
                     const SizedBox(
@@ -275,7 +279,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       decoration: InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                             borderSide:
-                                BorderSide(color: primaryColor, width: 2),
+                                BorderSide(color: Colors.grey, width: 2),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide:
@@ -304,28 +308,86 @@ class _SignInScreenState extends State<SignInScreen> {
                                   ),
                           )),
                       onChanged: (value) {
-                        _formKey.currentState!.validate()
-                            ? setState(() {})
-                            : null;
+                        print(value.isValidPassword);
+                        setState(() {
+                          ispasswordvalid = value.isValidPassword;
+                        });
+                        // _formKey.currentState!.validate()
+                        //     ? setState(() {})
+                        //     : null;
                       },
                     ),
                     const SizedBox(
                       height: 7,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 190.w, right: 0),
-                      child: InkWell(
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const ForgotPasswordScreen();
-                            }));
-                          },
-                          child: Text('Forgot password',
-                              textScaleFactor: 1.0,
-                              style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                      color: Colors.blue, fontSize: 12.sp)))),
+                    Row(
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ispasswordvalid
+                                ? Container()
+                                : SizedBox(
+                                    width: 143,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.error_outline,
+                                          color: Colors.red,
+                                          size: 17,
+                                        ),
+                                        Text(
+                                          'Password is Incorrect',
+                                          style: TextStyle(
+                                              color: Colors.red, fontSize: 13),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                            iseamilvalid
+                                ? Container()
+                                : SizedBox(
+                                    width: 143,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.error_outline,
+                                          color: Colors.red,
+                                          size: 17,
+                                        ),
+                                        Text(
+                                          'Email ID is Incorrect',
+                                          style: TextStyle(
+                                              color: Colors.red, fontSize: 13),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: iseamilvalid && ispasswordvalid
+                                  ? 200.w
+                                  : 72.w,
+                              right: 0),
+                          child: InkWell(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return const ForgotPasswordScreen();
+                                }));
+                              },
+                              child: Text('Forgot password',
+                                  textScaleFactor: 1.0,
+                                  style: GoogleFonts.montserrat(
+                                      textStyle: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 12.sp)))),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 80.h,
@@ -335,7 +397,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           disabledColor: seconderyColor,
                           padding: EdgeInsets.symmetric(
                               horizontal: 120.w, vertical: 15),
-                          color: primaryColor,
+                          color: iseamilvalid && ispasswordvalid
+                              ? primaryColor
+                              : seconderyColor,
                           child: Text(
                             'Sign In',
                             textScaleFactor: 1.0,
@@ -343,10 +407,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                 textStyle: TextStyle(fontSize: 15.sp)),
                           ),
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const Home();
-                            }));
+                            iseamilvalid && ispasswordvalid
+                                ? Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                    return const Home();
+                                  }))
+                                : null;
                           }),
                     ),
                     const SizedBox(height: 160),

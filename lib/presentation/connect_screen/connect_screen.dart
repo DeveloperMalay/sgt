@@ -37,7 +37,10 @@ class _ConnectScreenState extends State<ConnectScreen> {
               ),
               actions: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      BlocProvider.of<IslongpressCubit>(context)
+                          .longpressed('');
+                    },
                     icon: Icon(
                       Icons.delete_outline,
                       color: black,

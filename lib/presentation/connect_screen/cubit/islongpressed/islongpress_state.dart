@@ -4,6 +4,7 @@ part of 'islongpress_cubit.dart';
 class IslongpressState extends Equatable {
   final bool islongpressed;
   final String pressedindex;
+
   IslongpressState({
     required this.islongpressed,
     required this.pressedindex,
@@ -13,7 +14,10 @@ class IslongpressState extends Equatable {
   List<Object?> get props => [islongpressed, pressedindex];
 
   factory IslongpressState.initial() {
-    return IslongpressState(islongpressed: false, pressedindex: '');
+    return IslongpressState(
+      islongpressed: false,
+      pressedindex: '',
+    );
   }
 
   @override
@@ -22,6 +26,7 @@ class IslongpressState extends Equatable {
   IslongpressState copyWith({
     bool? islongpressed,
     String? pressedindex,
+    bool? messagelongpressed,
   }) {
     return IslongpressState(
       islongpressed: islongpressed ?? this.islongpressed,

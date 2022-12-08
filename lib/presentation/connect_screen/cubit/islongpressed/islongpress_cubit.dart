@@ -9,7 +9,11 @@ class IslongpressCubit extends Cubit<IslongpressState> {
   void longpressed(String index) {
     emit(state.copyWith(
         islongpressed: !state.islongpressed, pressedindex: index));
-    print(state.pressedindex);
-    print(index);
+  }
+
+  void messagepressed() {
+    emit(state.copyWith(
+      islongpressed: !state.islongpressed,
+    ));
   }
 }

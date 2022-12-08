@@ -13,7 +13,24 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  late TextEditingController _newpasswordController;
+  late TextEditingController _reenteredpasswordController;
   bool isvisible = false;
+  bool ispasswordmatched = true;
+  @override
+  void initState() {
+    _reenteredpasswordController = TextEditingController();
+    _newpasswordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _reenteredpasswordController.dispose();
+    _newpasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
@@ -55,6 +72,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   textStyle: TextStyle(color: Colors.grey, fontSize: 16.sp)),
             ),
             TextFormField(
+              controller: _newpasswordController,
               decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: grey, width: 2),
@@ -64,6 +82,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                   hintText: '.......',
                   focusColor: primaryColor),
+              onChanged: (value) {
+                _newpasswordController.text.toString() ==
+                        _reenteredpasswordController.text.toString()
+                    ? setState(() {
+                        ispasswordmatched == true;
+                      })
+                    : setState(() {
+                        ispasswordmatched == false;
+                      });
+              },
             ),
             SizedBox(
               height: 30.h,
@@ -75,6 +103,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   textStyle: TextStyle(color: Colors.grey, fontSize: 16.sp)),
             ),
             TextFormField(
+              controller: _reenteredpasswordController,
               obscureText: isvisible,
               decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
@@ -103,7 +132,37 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             size: 20.sp,
                           ),
                   )),
+              onChanged: (value) {
+                _newpasswordController.text.toString() ==
+                        _reenteredpasswordController.text.toString()
+                    ? setState(() {
+                        ispasswordmatched == true;
+                      })
+                    : setState(() {
+                        ispasswordmatched == false;
+                      });
+              },
             ),
+            _newpasswordController.text.toString() ==
+                    _reenteredpasswordController.text.toString()
+                ? Container()
+                : SizedBox(
+                    width: 143.w,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.error_outline,
+                          color: Colors.red,
+                          size: 17,
+                        ),
+                        Text(
+                          'Password not matched',
+                          style: TextStyle(color: Colors.red, fontSize: 13),
+                        ),
+                      ],
+                    ),
+                  ),
             SizedBox(
               height: 40.h,
             ),
@@ -111,7 +170,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               child: CupertinoButton(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 130, vertical: 15),
-                color: seconderyColor,
+                color: _newpasswordController.text ==
+                        _reenteredpasswordController.text
+                    ? primaryColor
+                    : seconderyColor,
                 child: Text(
                   'Send',
                   textScaleFactor: 1.0,
@@ -119,9 +181,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       textStyle: TextStyle(fontSize: 17.sp)),
                 ),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const PasswordChangeSuccessScreen();
-                  }));
+                  _newpasswordController.text.toString() ==
+                          _reenteredpasswordController.text.toString()
+                      ? Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                          return const PasswordChangeSuccessScreen();
+                        }))
+                      : null;
                 },
               ),
             ),

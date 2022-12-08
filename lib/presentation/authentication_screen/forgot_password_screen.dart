@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sgt/presentation/authentication_screen/change_password_screen.dart';
 import '../../utils/const.dart';
+import 'package:sgt/helper/validator.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -13,6 +14,8 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  bool iseamilvalid = true;
+
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
@@ -63,12 +66,45 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             TextFormField(
               decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 2),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: primaryColor, width: 2),
+                ),
                 hintText: 'Enter Registerded Email',
                 focusColor: primaryColor,
                 hintStyle: GoogleFonts.montserrat(
                     textStyle: TextStyle(color: grey, fontSize: 15.sp)),
               ),
+              onChanged: (value) {
+                setState(() {
+                  iseamilvalid = value.isValidEmail;
+                });
+              },
             ),
+            const SizedBox(
+              height: 7,
+            ),
+            iseamilvalid
+                ? Container()
+                : SizedBox(
+                    width: 143,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.error_outline,
+                          color: Colors.red,
+                          size: 17,
+                        ),
+                        Text(
+                          'Email ID is Incorrect',
+                          style: TextStyle(color: Colors.red, fontSize: 13),
+                        ),
+                      ],
+                    ),
+                  ),
             const SizedBox(
               height: 40,
             ),
@@ -76,7 +112,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               child: CupertinoButton(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 130, vertical: 15),
-                color: seconderyColor,
+                color: iseamilvalid ? primaryColor : seconderyColor,
                 child: Text(
                   'Send',
                   textScaleFactor: 1.0,
