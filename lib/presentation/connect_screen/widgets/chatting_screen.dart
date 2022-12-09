@@ -5,7 +5,6 @@ import 'package:sgt/presentation/connect_screen/cubit/message_pressed/message_pr
 import 'package:sgt/presentation/connect_screen/widgets/chat_model.dart';
 import 'package:sgt/presentation/connect_screen/widgets/send_message_widget.dart';
 import '../../../utils/const.dart';
-import '../cubit/islongpressed/islongpress_cubit.dart';
 import 'received_message_widget.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,6 +17,7 @@ class ChattingScreen extends StatefulWidget {
 
 class _ChattingScreenState extends State<ChattingScreen> {
   final ImagePicker _picker = ImagePicker();
+  List selectedChatTile = [];
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
@@ -42,8 +42,8 @@ class _ChattingScreenState extends State<ChattingScreen> {
                 actions: [
                   IconButton(
                       onPressed: () {
-                        BlocProvider.of<IslongpressCubit>(context)
-                            .longpressed('');
+                        // BlocProvider.of<IslongpressCubit>(context)
+                        //     .longpressed('');
                       },
                       icon: FaIcon(
                         FontAwesomeIcons.upload,
@@ -209,26 +209,29 @@ class _ChattingScreenState extends State<ChattingScreen> {
         backgroundColor: white,
         body: ListView(
           children: [
-            InkWell(
-              onLongPress: () {
-                BlocProvider.of<MessagePressedCubit>(
-                  context,
-                ).messagedPressed();
-              },
-              child: SentMessageScreen(
+            ListTile(
+              onLongPress: () {},
+              title: SentMessageScreen(
                   message:
                       "Hey John, I need you to head over to the leasing office to check up on the back door."),
             ),
-            ReceivedMessageScreen(message: "Sure!"),
-            ReceivedMessageScreen(message: "Should I look for something?"),
-            SentMessageScreen(message: "No we are all good"),
-            SentMessageScreen(
-                message:
-                    "A tenant brought up a concern about a open door and there might be someone there."),
-            ReceivedMessageScreen(message: "Ok I will check "),
-            SentMessageScreen(message: "Can we meet tomorrow?"),
-            ReceivedMessageScreen(
-                message: "Yes, of course we will meet tomorrow"),
+            ListTile(title: ReceivedMessageScreen(message: "Sure!")),
+            ListTile(
+                title: ReceivedMessageScreen(
+                    message: "Should I look for something?")),
+            ListTile(title: SentMessageScreen(message: "No we are all good")),
+            ListTile(
+              title: SentMessageScreen(
+                  message:
+                      "A tenant brought up a concern about a open door and there might be someone there."),
+            ),
+            ListTile(title: ReceivedMessageScreen(message: "Ok I will check ")),
+            ListTile(
+                title: SentMessageScreen(message: "Can we meet tomorrow?")),
+            ListTile(
+              title: ReceivedMessageScreen(
+                  message: "Yes, of course we will meet tomorrow"),
+            ),
           ],
         ),
         bottomNavigationBar: Padding(

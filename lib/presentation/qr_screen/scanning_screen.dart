@@ -1,8 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import '../../utils/const.dart';
@@ -18,6 +14,13 @@ class _ScanningScreenState extends State<ScanningScreen> {
   final qrKey = GlobalKey(debugLabel: "Qr");
   QRViewController? qrController;
   Barcode? barcode;
+
+  @override
+  void initState() {
+    qrController!.resumeCamera();
+    super.initState();
+  }
+
   @override
   void dispose() {
     qrController?.dispose();
@@ -27,9 +30,9 @@ class _ScanningScreenState extends State<ScanningScreen> {
   @override
   void reassemble() async {
     super.reassemble();
-    if (Platform.isAndroid) {
-      await qrController!.pauseCamera();
-    }
+    // if (Platform.isAndroid) {
+    //   await qrController!.pauseCamera();
+    // }
     qrController!.resumeCamera();
   }
 

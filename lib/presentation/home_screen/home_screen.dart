@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sgt/presentation/all_team_member/all_team_member_screen.dart';
 import 'package:sgt/presentation/home_screen/widgets/circular_profile_widget.dart';
 import 'package:sgt/presentation/home_screen/widgets/location_details_card.dart';
 import 'package:sgt/presentation/jobs_screen/jobs_screen.dart';
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
               icon: Icon(
                 Icons.map,
                 color: black,
-                size: 40,
+                size: 30,
               )),
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
@@ -42,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                 icon: Icon(
                   Icons.add,
                   color: black,
-                  size: 40,
+                  size: 30,
                 )),
           )
         ],
@@ -59,11 +60,19 @@ class HomeScreen extends StatelessWidget {
                         color: black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold)),
-                const Text('See all > ',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 15,
-                    ))
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AllTeamMemberScreen()));
+                  },
+                  child: const Text('See all > ',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15,
+                      )),
+                )
               ],
             ),
             const SizedBox(

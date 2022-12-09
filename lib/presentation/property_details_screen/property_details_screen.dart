@@ -301,17 +301,17 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                                 borderRadius: BorderRadius.circular(20),
                                 boxShadow: const [
                                   BoxShadow(
-                                    color: Colors.grey,
-                                    offset: Offset(5.0, 5.0),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 2.0,
+                                    color: Color.fromARGB(255, 195, 195, 195),
+                                    offset: Offset(1.5, 1.5),
+                                    blurRadius: 2.5,
+                                    spreadRadius: 2,
                                   ),
                                   BoxShadow(
                                     color: Colors.grey,
-                                    offset: Offset(5.0, 5.0),
-                                    blurRadius: 10.0,
-                                    spreadRadius: 2.0,
-                                  )
+                                    offset: Offset(1.5, 1.5),
+                                    blurRadius: 1.5,
+                                    spreadRadius: 0.5,
+                                  ),
                                 ]),
                             height: 300,
                             width: 500,

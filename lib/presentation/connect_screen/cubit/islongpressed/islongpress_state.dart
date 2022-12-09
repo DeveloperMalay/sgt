@@ -2,35 +2,25 @@
 part of 'islongpress_cubit.dart';
 
 class IslongpressState extends Equatable {
-  final bool islongpressed;
-  final String pressedindex;
+  final List selectedChatTile;
 
-  IslongpressState({
-    required this.islongpressed,
-    required this.pressedindex,
-  });
-
-  @override
-  List<Object?> get props => [islongpressed, pressedindex];
+  IslongpressState({required this.selectedChatTile});
 
   factory IslongpressState.initial() {
+    return IslongpressState(selectedChatTile: []);
+  }
+
+  IslongpressState copyWith({
+    List? selectedChatTile,
+  }) {
     return IslongpressState(
-      islongpressed: false,
-      pressedindex: '',
+      selectedChatTile: selectedChatTile ?? this.selectedChatTile,
     );
   }
+
+  @override
+  List<Object?> get props => [selectedChatTile];
 
   @override
   bool get stringify => true;
-
-  IslongpressState copyWith({
-    bool? islongpressed,
-    String? pressedindex,
-    bool? messagelongpressed,
-  }) {
-    return IslongpressState(
-      islongpressed: islongpressed ?? this.islongpressed,
-      pressedindex: pressedindex ?? this.pressedindex,
-    );
-  }
 }

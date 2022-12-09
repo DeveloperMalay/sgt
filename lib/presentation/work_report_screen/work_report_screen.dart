@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sgt/presentation/home.dart';
 import 'package:sgt/presentation/work_report_screen/emergency_report_screen.dart';
 import 'package:sgt/presentation/work_report_screen/general_report_screen.dart';
@@ -33,29 +33,33 @@ class _WorkReportScreenState extends State<WorkReportScreen> {
             Navigator.pop(context);
           },
         ),
+        centerTitle: true,
+        title: Text(
+          'Submit Report',
+          textScaleFactor: 1.0,
+          style: GoogleFonts.montserrat(
+              textStyle: const TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.w500)),
+        ),
       ),
+      backgroundColor: white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Submit Report',
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                textScaleFactor: 1.0,
-              ),
               const SizedBox(
-                height: 19,
+                height: 40,
               ),
               Text(
                 'Select report type below',
                 style: TextStyle(
-                    color: black, fontSize: 17, fontWeight: FontWeight.bold),
+                    color: black, fontSize: 17.sp, fontWeight: FontWeight.bold),
                 textScaleFactor: 1.0,
               ),
               const SizedBox(
-                height: 18,
+                height: 25,
               ),
               InkWell(
                 onTap: () {
