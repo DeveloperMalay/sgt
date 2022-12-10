@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sgt/presentation/connect_screen/cubit/message_pressed/message_pressed_cubit.dart';
 import 'package:sgt/presentation/connect_screen/widgets/chat_model.dart';
+import 'package:sgt/presentation/connect_screen/widgets/media_preview_screen.dart';
 import 'package:sgt/presentation/connect_screen/widgets/send_message_widget.dart';
 import '../../../utils/const.dart';
+import 'image_message.dart';
 import 'received_message_widget.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -23,215 +22,358 @@ class _ChattingScreenState extends State<ChattingScreen> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
-        appBar: BlocProvider.of<MessagePressedCubit>(context, listen: true)
-                .state
-                .messagelongpressed
-            ? AppBar(
-                elevation: 0,
-                leadingWidth: 0,
-                backgroundColor: white,
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: black,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                actions: [
-                  IconButton(
-                      onPressed: () {
-                        // BlocProvider.of<IslongpressCubit>(context)
-                        //     .longpressed('');
-                      },
-                      icon: FaIcon(
-                        FontAwesomeIcons.upload,
-                        color: black,
-                        size: 25,
-                      )),
-                  IconButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 0, vertical: 0),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Text(
-                                      'Delete media?',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text(
-                                      'Are you sure you want to delete this media?',
-                                      textAlign: TextAlign.center,
-                                      textScaleFactor: 1.0,
-                                      style: TextStyle(
-                                          fontSize: 15, color: Colors.grey),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Divider(
-                                      color: Colors.grey,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 20),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                              color: white,
-                                              border: Border.all(
-                                                  color: primaryColor),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'Cencel',
-                                                textScaleFactor: 1.0,
-                                                style: TextStyle(
-                                                    color: primaryColor),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 70,
-                                          ),
-                                          Container(
-                                            height: 40,
-                                            width: 1,
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 65,
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                              color: primaryColor,
-                                              border: Border.all(
-                                                  color: primaryColor),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'Delete',
-                                                textScaleFactor: 1.0,
-                                                style: TextStyle(color: white),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            });
-                      },
+        appBar:
+            // BlocProvider.of<MessagePressedCubit>(context, listen: true)
+            //         .state
+            //         .messagelongpressed
+            selectedChatTile.isNotEmpty
+                ? AppBar(
+                    elevation: 0,
+                    leadingWidth: 0,
+                    backgroundColor: white,
+                    leading: IconButton(
                       icon: Icon(
-                        Icons.delete_outline,
+                        Icons.arrow_back_ios,
                         color: black,
-                        size: 25,
-                      ))
-                ],
-              )
-            : AppBar(
-                elevation: 0,
-                backgroundColor: white,
-                leading: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15.0),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: black,
-                      size: 30,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                  ),
-                ),
-                leadingWidth: 25,
-                title: ListTile(
-                  leading: Stack(
-                    children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: grey,
-                        backgroundImage: NetworkImage(
-                          dummyData[widget.index].profileUrl,
+                    actions: [
+                      // InkWell(
+                      //   onTap: () {
+                      //     print('share');
+                      //   },
+                      //   child: Image.asset(
+                      //     'assets/share.png',
+                      //     fit: BoxFit.cover,
+                      //   ),
+                      // ),
+                      IconButton(
+                        onPressed: () {
+                          // BlocProvider.of<IslongpressCubit>(context)
+                          //     .longpressed('');
+                        },
+                        icon: Icon(
+                          Icons.upload_outlined,
+                          color: black,
+                          size: 30,
+                        ),
+                        // icon: FaIcon(
+                        //   FontAwesomeIcons.upload,
+                        //   color: black,
+                        //   size: 25,
+                        // ),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(12.0))),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 0, vertical: 0),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          'Delete media?',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 12),
+                                          child: Text(
+                                            'Are you sure you want to delete this media?',
+                                            textAlign: TextAlign.center,
+                                            textScaleFactor: 1.0,
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.grey),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Divider(
+                                          height: 0,
+                                          color: Colors.grey,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 15),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8, vertical: 5),
+                                                decoration: BoxDecoration(
+                                                  color: white,
+                                                  border: Border.all(
+                                                      color: primaryColor),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    'Cencel',
+                                                    textScaleFactor: 1.0,
+                                                    style: TextStyle(
+                                                        color: primaryColor,
+                                                        fontSize: 15),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 70,
+                                              ),
+                                              Container(
+                                                height: 40,
+                                                width: 1,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 65,
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8, vertical: 5),
+                                                decoration: BoxDecoration(
+                                                  color: primaryColor,
+                                                  border: Border.all(
+                                                      color: primaryColor),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    'Delete',
+                                                    textScaleFactor: 1.0,
+                                                    style: TextStyle(
+                                                        color: white,
+                                                        fontSize: 15),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                });
+                          },
+                          icon: Icon(
+                            Icons.delete_outline,
+                            color: black,
+                            size: 25,
+                          ))
+                    ],
+                  )
+                : AppBar(
+                    elevation: 0,
+                    backgroundColor: white,
+                    leading: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: black,
+                          size: 30,
                         ),
                       ),
-                      dummyData[widget.index].isOnline
-                          ? Positioned(
-                              top: 26,
-                              left: 26,
-                              child: Container(
-                                height: 13,
-                                width: 13,
-                                decoration: BoxDecoration(
-                                  color: greenColor,
-                                  border: Border.all(color: white, width: 2),
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                              ),
-                            )
-                          : Positioned(
-                              top: 40,
-                              left: 40,
-                              child: Container(),
-                            )
-                    ],
+                    ),
+                    leadingWidth: 25,
+                    title: ListTile(
+                      leading: Stack(
+                        children: [
+                          CircleAvatar(
+                            radius: 20,
+                            backgroundColor: grey,
+                            backgroundImage: NetworkImage(
+                              dummyData[widget.index].profileUrl,
+                            ),
+                          ),
+                          dummyData[widget.index].isOnline
+                              ? Positioned(
+                                  top: 26,
+                                  left: 26,
+                                  child: Container(
+                                    height: 13,
+                                    width: 13,
+                                    decoration: BoxDecoration(
+                                      color: greenColor,
+                                      border:
+                                          Border.all(color: white, width: 2),
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                  ),
+                                )
+                              : Positioned(
+                                  top: 40,
+                                  left: 40,
+                                  child: Container(),
+                                )
+                        ],
+                      ),
+                      title: Text(dummyData[widget.index].name),
+                      subtitle: dummyData[widget.index].isOnline
+                          ? const Text("Active Now")
+                          : const Text("Not Active"),
+                    ),
                   ),
-                  title: Text(dummyData[widget.index].name),
-                  subtitle: dummyData[widget.index].isOnline
-                      ? const Text("Active Now")
-                      : const Text("Not Active"),
-                ),
-              ),
         backgroundColor: white,
         body: ListView(
           children: [
             ListTile(
-              onLongPress: () {},
+              tileColor: selectedChatTile.contains(1) ? seconderyColor : null,
+              onLongPress: () {
+                setState(() {
+                  selectedChatTile.add(1);
+                });
+                print(selectedChatTile.contains(1));
+              },
+              onTap: () {
+                setState(() {
+                  selectedChatTile.remove(1);
+                });
+              },
               title: SentMessageScreen(
                   message:
                       "Hey John, I need you to head over to the leasing office to check up on the back door."),
             ),
-            ListTile(title: ReceivedMessageScreen(message: "Sure!")),
             ListTile(
+                tileColor: selectedChatTile.contains(2) ? seconderyColor : null,
+                onLongPress: () {
+                  setState(() {
+                    selectedChatTile.add(2);
+                  });
+                },
+                onTap: () {
+                  setState(() {
+                    selectedChatTile.remove(2);
+                  });
+                },
+                title: ReceivedMessageScreen(message: "Sure!")),
+            ListTile(
+                tileColor: selectedChatTile.contains(3) ? seconderyColor : null,
+                onLongPress: () {
+                  setState(() {
+                    selectedChatTile.add(3);
+                  });
+                },
+                onTap: () {
+                  setState(() {
+                    selectedChatTile.remove(3);
+                  });
+                },
                 title: ReceivedMessageScreen(
                     message: "Should I look for something?")),
-            ListTile(title: SentMessageScreen(message: "No we are all good")),
             ListTile(
+                tileColor: selectedChatTile.contains(4) ? seconderyColor : null,
+                onLongPress: () {
+                  setState(() {
+                    selectedChatTile.add(4);
+                  });
+                },
+                onTap: () {
+                  setState(() {
+                    selectedChatTile.remove(4);
+                  });
+                },
+                title: SentMessageScreen(message: "No we are all good")),
+            ListTile(
+              tileColor: selectedChatTile.contains(5) ? seconderyColor : null,
+              onLongPress: () {
+                setState(() {
+                  selectedChatTile.add(5);
+                });
+              },
+              onTap: () {
+                setState(() {
+                  selectedChatTile.remove(5);
+                });
+              },
               title: SentMessageScreen(
                   message:
                       "A tenant brought up a concern about a open door and there might be someone there."),
             ),
-            ListTile(title: ReceivedMessageScreen(message: "Ok I will check ")),
             ListTile(
+                tileColor: selectedChatTile.contains(6) ? seconderyColor : null,
+                onLongPress: () {
+                  setState(() {
+                    selectedChatTile.add(6);
+                  });
+                },
+                onTap: () {
+                  setState(() {
+                    selectedChatTile.remove(6);
+                  });
+                },
+                title: ReceivedMessageScreen(message: "Ok I will check ")),
+            ListTile(
+                tileColor: selectedChatTile.contains(7) ? seconderyColor : null,
+                onLongPress: () {
+                  setState(() {
+                    selectedChatTile.add(7);
+                  });
+                },
+                onTap: () {
+                  setState(() {
+                    selectedChatTile.remove(7);
+                  });
+                },
                 title: SentMessageScreen(message: "Can we meet tomorrow?")),
             ListTile(
+              tileColor: selectedChatTile.contains(8) ? seconderyColor : null,
+              onLongPress: () {
+                setState(() {
+                  selectedChatTile.add(8);
+                });
+              },
+              onTap: () {
+                setState(() {
+                  selectedChatTile.remove(8);
+                });
+              },
               title: ReceivedMessageScreen(
                   message: "Yes, of course we will meet tomorrow"),
             ),
+            ListTile(
+              tileColor: selectedChatTile.contains(9) ? seconderyColor : null,
+              onLongPress: () {
+                setState(() {
+                  selectedChatTile.add(9);
+                });
+              },
+              onTap: () {
+                selectedChatTile.contains(9)
+                    ? setState(() {
+                        selectedChatTile.remove(9);
+                      })
+                    : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                MediaPreviewScreen(index: widget.index)));
+              },
+              title: ImageMessage(),
+            )
           ],
         ),
         bottomNavigationBar: Padding(
