@@ -253,70 +253,47 @@ class _MediaPreviewScreenState extends State<MediaPreviewScreen> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 4.5 / 5,
             width: MediaQuery.of(context).size.width,
-            // child: CarouselSlider.builder(
-            //     carouselController: controller,
-            //     itemCount: data.length,
-            //     itemBuilder: (context, index, realIndex) {
-            //       return Stack(
-            //         children: [
-            //           Image.network(
-            //             data[index],
-            //             height: MediaQuery.of(context).size.height,
-            //             width: MediaQuery.of(context).size.width,
-            //             fit: BoxFit.cover,
-            //           ),
-            //           Positioned(
-            //             top: 382.90,
-            //             left: 0,
-            //             child: IconButton(
-            //               onPressed: () {
-            //                 controller.previousPage();
-            //               },
-            //               icon: Icon(
-            //                 Icons.arrow_back_ios,
-            //                 color: black,
-            //                 size: 35,
-            //               ),
-            //             ),
-            //           ),
-            //           Positioned(
-            //             top: 382.90,
-            //             right: 0,
-            //             child: IconButton(
-            //               onPressed: () {
-            //                 controller.nextPage();
-            //               },
-            //               icon: Icon(
-            //                 Icons.arrow_forward_ios,
-            //                 color: white,
-            //                 size: 35,
-            //               ),
-            //             ),
-            //           ),
-            //         ],
-            //       );
-            //     },
-            //     options: CarouselOptions(
-            //       initialPage: 0,
-            //     )),
             child: Stack(
               children: [
-                ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return Image.network(
-                        data[index],
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.cover,
-                      );
-                    }),
+                CarouselSlider.builder(
+                  carouselController: controller,
+                  itemCount: data.length,
+                  itemBuilder: (context, index, realIndex) {
+                    return Stack(
+                      children: [
+                        Image.network(
+                          data[index],
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover,
+                        ),
+                        Positioned(
+                            top: 20,
+                            right: 20,
+                            child: Text(
+                              "${index + 1}/${data.length}",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ))
+                      ],
+                    );
+                  },
+                  options: CarouselOptions(
+                    initialPage: 0,
+                    viewportFraction: 1,
+                    disableCenter: true,
+                    height: MediaQuery.of(context).size.height * 4.5 / 5,
+                  ),
+                ),
                 Positioned(
-                  top: 382.90,
+                  top: 350,
                   left: 0,
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.previousPage();
+                    },
                     icon: Icon(
                       Icons.arrow_back_ios,
                       color: white,
@@ -325,10 +302,12 @@ class _MediaPreviewScreenState extends State<MediaPreviewScreen> {
                   ),
                 ),
                 Positioned(
-                  top: 382.90,
+                  top: 350,
                   right: 0,
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.nextPage();
+                    },
                     icon: Icon(
                       Icons.arrow_forward_ios,
                       color: white,
@@ -338,6 +317,45 @@ class _MediaPreviewScreenState extends State<MediaPreviewScreen> {
                 ),
               ],
             ),
+            // child: Stack(
+            //   children: [
+            //     ListView.builder(
+            //         scrollDirection: Axis.horizontal,
+            //         itemCount: data.length,
+            //         itemBuilder: (context, index) {
+            //           return Image.network(
+            //             data[index],
+            //             height: MediaQuery.of(context).size.height,
+            //             width: MediaQuery.of(context).size.width,
+            //             fit: BoxFit.cover,
+            //           );
+            //         }),
+            //     Positioned(
+            //       top: 382.90,
+            //       left: 0,
+            //       child: IconButton(
+            //         onPressed: () {},
+            //         icon: Icon(
+            //           Icons.arrow_back_ios,
+            //           color: white,
+            //           size: 35,
+            //         ),
+            //       ),
+            //     ),
+            //     Positioned(
+            //       top: 382.90,
+            //       right: 0,
+            //       child: IconButton(
+            //         onPressed: () {},
+            //         icon: Icon(
+            //           Icons.arrow_forward_ios,
+            //           color: white,
+            //           size: 35,
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ),
         ],
       ),
