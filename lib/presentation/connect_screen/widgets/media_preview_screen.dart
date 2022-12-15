@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sgt/presentation/connect_screen/widgets/chat_model.dart';
 import '../../../utils/const.dart';
+import 'share_to_connect_screen.dart';
 
 class MediaPreviewScreen extends StatefulWidget {
   const MediaPreviewScreen({super.key, required this.index});
@@ -225,7 +226,10 @@ class _MediaPreviewScreenState extends State<MediaPreviewScreen> {
                       PopupMenuItem(
                           height: 40,
                           onTap: () {
-                            setState(() {});
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ShareToConnection()));
                           },
                           child: Container(
                             height: 20,

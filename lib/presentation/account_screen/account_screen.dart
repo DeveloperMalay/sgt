@@ -13,16 +13,16 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: white, elevation: 0, actions: [
-        IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const QrScreen();
-              }));
-            },
-            icon: Icon(
-              Icons.qr_code_scanner,
-              color: black,
-            )),
+        // IconButton(
+        //     onPressed: () {
+        //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //         return const QrScreen();
+        //       }));
+        //     },
+        //     icon: Icon(
+        //       Icons.qr_code_scanner,
+        //       color: black,
+        //     )),
         IconButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -222,21 +222,21 @@ class AccountScreen extends StatelessWidget {
                       hintText: '90045',
                       focusColor: primaryColor),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Center(
-                  child: CupertinoButton(
-                      disabledColor: seconderyColor,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 90.w, vertical: 15),
-                      color: primaryColor,
-                      child: Text(
-                        'Update Profile',
-                        style: TextStyle(fontSize: 15.sp),
-                      ),
-                      onPressed: () {}),
-                ),
+                // const SizedBox(
+                //   height: 40,
+                // ),
+                // Center(
+                //   child: CupertinoButton(
+                //       disabledColor: seconderyColor,
+                //       padding:
+                //           EdgeInsets.symmetric(horizontal: 90.w, vertical: 15),
+                //       color: primaryColor,
+                //       child: Text(
+                //         'Update Profile',
+                //         style: TextStyle(fontSize: 15.sp),
+                //       ),
+                //       onPressed: () {}),
+                // ),
                 const SizedBox(
                   height: 40,
                 ),

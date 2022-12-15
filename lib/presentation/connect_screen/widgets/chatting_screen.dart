@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:fluttericon/linecons_icons.dart';
-import 'package:fluttericon/typicons_icons.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:sgt/presentation/connect_screen/widgets/camera_screen.dart';
 import 'package:sgt/presentation/connect_screen/widgets/chat_model.dart';
 import 'package:sgt/presentation/connect_screen/widgets/media_preview_screen.dart';
 import 'package:sgt/presentation/connect_screen/widgets/send_message_widget.dart';
+import 'package:sgt/presentation/connect_screen/widgets/share_to_connect_screen.dart';
 import '../../../utils/const.dart';
 import 'image_message.dart';
 import 'received_message_widget.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'video_preview.dart';
 
 class ChattingScreen extends StatefulWidget {
   const ChattingScreen({super.key, required this.index});
@@ -21,6 +21,7 @@ class ChattingScreen extends StatefulWidget {
 class _ChattingScreenState extends State<ChattingScreen> {
   final ImagePicker _picker = ImagePicker();
   List selectedChatTile = [];
+  bool selectMedia = false;
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
@@ -56,11 +57,13 @@ class _ChattingScreenState extends State<ChattingScreen> {
                       // ),
                       IconButton(
                         onPressed: () {
-                          // BlocProvider.of<IslongpressCubit>(context)
-                          //     .longpressed('');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ShareToConnection()));
                         },
                         icon: Icon(
-                          LineIcons.upload  ,
+                          LineIcons.upload,
                           color: black,
                           size: 30,
                         ),
@@ -377,6 +380,20 @@ class _ChattingScreenState extends State<ChattingScreen> {
                                 MediaPreviewScreen(index: widget.index)));
               },
               title: ImageMessage(),
+            ),
+            ListTile(
+              tileColor: selectedChatTile.contains(10) ? seconderyColor : null,
+              onLongPress: () {
+                setState(() {
+                  selectedChatTile.add(10);
+                });
+              },
+              onTap: () {
+                setState(() {
+                  selectedChatTile.remove(10);
+                });
+              },
+              title: VideoPreviewWidget(),
             )
           ],
         ),
@@ -391,135 +408,286 @@ class _ChattingScreenState extends State<ChattingScreen> {
             ),
             height: 60,
             child: Row(mainAxisSize: MainAxisSize.min, children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CameraScreen()));
-                    // showModalBottomSheet(
-                    //     context: context,
-                    //     shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(20)),
-                    //     builder: (context) {
-                    //       return Padding(
-                    //         padding: const EdgeInsets.symmetric(
-                    //             horizontal: 8, vertical: 25),
-                    //         child: Column(
-                    //           mainAxisSize: MainAxisSize.min,
-                    //           children: [
-                    //             const Text(
-                    //               'Select Media From?',
-                    //               style: TextStyle(fontSize: 16),
-                    //             ),
-                    //             const Text(
-                    //               'Use camera or select file from device gallery',
-                    //               style: TextStyle(
-                    //                   fontSize: 12,
-                    //                   color:
-                    //                       Color.fromARGB(255, 109, 109, 109)),
-                    //             ),
-                    //             const SizedBox(
-                    //               height: 20,
-                    //             ),
-                    //             Row(
-                    //               mainAxisAlignment:
-                    //                   MainAxisAlignment.spaceAround,
-                    //               children: [
-                    //                 InkWell(
-                    //                   onTap: () async {
-                    //                     // Capture a photo
-                    //                     final XFile? photo =
-                    //                         await _picker.pickImage(
-                    //                             source: ImageSource.camera);
+              selectMedia
+                  ? Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                builder: (context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 25),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Text(
+                                          'Select Media From?',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        const Text(
+                                          'Use camera or select file from device gallery',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: Color.fromARGB(
+                                                  255, 109, 109, 109)),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            InkWell(
+                                              onTap: () async {
+                                                // Capture a photo
+                                                final XFile? photo =
+                                                    await _picker.pickImage(
+                                                        source:
+                                                            ImageSource.camera);
 
-                    //                     // Capture a video
-                    //                     final XFile? video =
-                    //                         await _picker.pickVideo(
-                    //                             source: ImageSource.camera);
-                    //                   },
-                    //                   child: Column(
-                    //                     children: [
-                    //                       Container(
-                    //                         height: 60,
-                    //                         width: 60,
-                    //                         decoration: BoxDecoration(
-                    //                           color: grey,
-                    //                           borderRadius:
-                    //                               BorderRadius.circular(10),
-                    //                         ),
-                    //                         child: const Icon(
-                    //                           Icons.camera_alt,
-                    //                           size: 30,
-                    //                         ),
-                    //                       ),
-                    //                       const SizedBox(
-                    //                         height: 8,
-                    //                       ),
-                    //                       const Text('Camera')
-                    //                     ],
-                    //                   ),
-                    //                 ),
-                    //                 InkWell(
-                    //                   onTap: () async {
-                    //                     // Pick an image
-                    //                     final XFile? image =
-                    //                         await _picker.pickImage(
-                    //                             source: ImageSource.gallery);
+                                                // // Capture a video
+                                                // final XFile? video =
+                                                //     await _picker.pickVideo(
+                                                //         source: ImageSource.camera);
+                                              },
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                      color: grey,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.camera_alt,
+                                                      size: 30,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  const Text('Camera')
+                                                ],
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () async {
+                                                // Pick an image
+                                                // final XFile? image =
+                                                //     await _picker.pickImage(
+                                                //         source: ImageSource.gallery);
 
-                    //                     // Pick a video
-                    //                     final XFile? video =
-                    //                         await _picker.pickVideo(
-                    //                             source: ImageSource.gallery);
+                                                // Pick multiple images
+                                                final List<XFile>? images =
+                                                    await _picker
+                                                        .pickMultiImage();
+                                              },
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                      color: white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 5,
+                                                          blurRadius: 7,
+                                                          offset: const Offset(
+                                                              0,
+                                                              3), // changes position of shadow
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.photo_outlined,
+                                                      size: 30,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  const Text('Gallery')
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                });
+                            setState(() {
+                              selectMedia = false;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.photo_rounded,
+                            color: primaryColor,
+                            size: 30,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                builder: (context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 25),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Text(
+                                          'Select Media From?',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        const Text(
+                                          'Use camera or select file from device gallery',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: Color.fromARGB(
+                                                  255, 109, 109, 109)),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            InkWell(
+                                              onTap: () async {
+                                                // // Capture a photo
+                                                // final XFile? photo =
+                                                //     await _picker.pickImage(
+                                                //         source: ImageSource.camera);
 
-                    //                     // Pick multiple images
-                    //                     final List<XFile>? images =
-                    //                         await _picker.pickMultiImage();
-                    //                   },
-                    //                   child: Column(
-                    //                     children: [
-                    //                       Container(
-                    //                         height: 60,
-                    //                         width: 60,
-                    //                         decoration: BoxDecoration(
-                    //                           color: white,
-                    //                           borderRadius:
-                    //                               BorderRadius.circular(10),
-                    //                           boxShadow: [
-                    //                             BoxShadow(
-                    //                               color: Colors.grey
-                    //                                   .withOpacity(0.5),
-                    //                               spreadRadius: 5,
-                    //                               blurRadius: 7,
-                    //                               offset: const Offset(0,
-                    //                                   3), // changes position of shadow
-                    //                             ),
-                    //                           ],
-                    //                         ),
-                    //                         child: const Icon(
-                    //                           Icons.photo_outlined,
-                    //                           size: 30,
-                    //                         ),
-                    //                       ),
-                    //                       const SizedBox(
-                    //                         height: 8,
-                    //                       ),
-                    //                       const Text('Gallery')
-                    //                     ],
-                    //                   ),
-                    //                 )
-                    //               ],
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       );
-                    //     });
-                  },
-                  icon: Icon(
-                    Icons.add_circle_sharp,
-                    color: primaryColor,
-                    size: 30,
-                  )),
+                                                // Capture a video
+                                                final XFile? video =
+                                                    await _picker.pickVideo(
+                                                        source:
+                                                            ImageSource.camera);
+                                              },
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                      color: grey,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.camera_alt,
+                                                      size: 30,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  const Text('Camera')
+                                                ],
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () async {
+                                                // Pick an image
+                                                // final XFile? image =
+                                                //     await _picker.pickImage(
+                                                //         source: ImageSource.gallery);
+
+                                                // Pick a video
+                                                final XFile? video =
+                                                    await _picker.pickVideo(
+                                                        source: ImageSource
+                                                            .gallery);
+
+                                                // Pick multiple images
+                                                // final List<XFile>? images =
+                                                //     await _picker.pickMultiImage();
+                                              },
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                      color: white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 5,
+                                                          blurRadius: 7,
+                                                          offset: const Offset(
+                                                              0,
+                                                              3), // changes position of shadow
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.photo_outlined,
+                                                      size: 30,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  const Text('Gallery')
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                });
+                            setState(() {
+                              selectMedia = false;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.videocam_rounded,
+                            color: primaryColor,
+                            size: 30,
+                          ),
+                        )
+                      ],
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        setState(() {
+                          selectMedia = true;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.add_circle_sharp,
+                        color: primaryColor,
+                        size: 30,
+                      )),
               Expanded(
                 child: TextFormField(
                   decoration: InputDecoration(

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,9 @@ class EditAccountScreen extends StatefulWidget {
 }
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
+  File? imageFile;
+  List imageNames = [];
+  List<XFile>? guardcard = [];
   final pinController = TextEditingController();
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
@@ -89,13 +94,20 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   Center(
                     child: Stack(
                       children: [
-                        CircleAvatar(
-                          radius: 70,
-                          backgroundColor: grey,
-                          backgroundImage: const NetworkImage(
-                            'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-                          ),
-                        ),
+                        imageFile != null
+                            ? CircleAvatar(
+                                radius: 70,
+                                backgroundColor: grey,
+                                backgroundImage:
+                                    FileImage(File(imageFile!.path)),
+                              )
+                            : CircleAvatar(
+                                radius: 70,
+                                backgroundColor: grey,
+                                backgroundImage: const NetworkImage(
+                                  'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                                ),
+                              ),
                         Positioned(
                           top: 100,
                           left: 100,
@@ -139,12 +151,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                                       await _picker.pickImage(
                                                           source: ImageSource
                                                               .camera);
-
-                                                  // Capture a video
-                                                  final XFile? video =
-                                                      await _picker.pickVideo(
-                                                          source: ImageSource
-                                                              .camera);
+                                                  if (photo != null) {
+                                                    setState(() {
+                                                      imageFile =
+                                                          File(photo.path);
+                                                    });
+                                                  }
                                                 },
                                                 child: Column(
                                                   children: [
@@ -179,17 +191,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                                       await _picker.pickImage(
                                                           source: ImageSource
                                                               .gallery);
-
-                                                  // Pick a video
-                                                  final XFile? video =
-                                                      await _picker.pickVideo(
-                                                          source: ImageSource
-                                                              .gallery);
-
-                                                  // Pick multiple images
-                                                  final List<XFile>? images =
-                                                      await _picker
-                                                          .pickMultiImage();
+                                                  if (image != null) {
+                                                    setState(() {
+                                                      imageFile =
+                                                          File(image.path);
+                                                    });
+                                                  }
                                                 },
                                                 child: Column(
                                                   children: [
@@ -403,16 +410,223 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  DottedBorder(
-                    color: Colors.grey,
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5),
-                      child: Center(
-                          child: Icon(
-                        Icons.add,
-                        color: Colors.grey,
-                        size: 50,
-                      )),
+                  guardcard!.isNotEmpty
+                      ? SizedBox(
+                          height: 110 * guardcard!.length.toDouble(),
+                          child: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: guardcard!.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  margin: EdgeInsets.symmetric(vertical: 20),
+                                  child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                            margin: EdgeInsets.all(5),
+                                            height: 60,
+                                            width: 60,
+                                            alignment: Alignment.center,
+                                            child: Image.file(
+                                                File(guardcard![index].path))),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                                width: 190,
+                                                child: Text(imageNames[index],
+                                                    style: TextStyle())),
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height: 4,
+                                                  width: 200,
+                                                  decoration: BoxDecoration(
+                                                      color: primaryColor),
+                                                ),
+                                                SizedBox(width: 5),
+                                                Text('100 %',
+                                                    style: TextStyle(
+                                                        fontSize: 12)),
+                                                SizedBox(width: 5),
+                                                InkWell(
+                                                  onTap: () {
+                                                    print('remove');
+
+                                                    setState(() {
+                                                      guardcard!
+                                                          .removeAt(index);
+                                                      // imageNames.removeAt(index);
+                                                    });
+                                                    print(index);
+                                                    print(guardcard);
+                                                    // imageNames
+                                                    //     .add(path.dirname(photo.path));
+                                                  },
+                                                  child: Container(
+                                                      height: 15,
+                                                      width: 15,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100),
+                                                          border: Border.all(
+                                                              color:
+                                                                  primaryColor)),
+                                                      child: Icon(Icons.close,
+                                                          size: 12)),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ]),
+                                );
+                              }),
+                        )
+                      : Container(),
+                  InkWell(
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          builder: (context) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 25),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    'Select Media From?',
+                                    textScaleFactor: 1.0,
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  const Text(
+                                    'Use camera or select file from device gallery',
+                                    textScaleFactor: 1.0,
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color:
+                                            Color.fromARGB(255, 109, 109, 109)),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          // Capture a photo
+                                          final XFile? photo =
+                                              await _picker.pickImage(
+                                                  source: ImageSource.camera);
+                                          if (photo != null) {
+                                            guardcard!.add(photo);
+
+                                            imageNames.add(photo.name);
+                                            setState(() {});
+                                          }
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 60,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                color: grey,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: const Icon(
+                                                Icons.camera_alt,
+                                                size: 30,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            const Text(
+                                              'Camera',
+                                              textScaleFactor: 1.0,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          // Pick multiple images
+                                          final List<XFile>? images =
+                                              await _picker.pickMultiImage();
+                                          if (images != null) {
+                                            for (var i = 0;
+                                                i < images.length;
+                                                i++) {
+                                              guardcard!.add(images[i]);
+                                            }
+                                            imageNames.add(images[0].name);
+                                            setState(() {});
+                                          }
+                                          print('$guardcard   $imageNames');
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 60,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                color: white,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.5),
+                                                    spreadRadius: 5,
+                                                    blurRadius: 7,
+                                                    offset: const Offset(0,
+                                                        3), // changes position of shadow
+                                                  ),
+                                                ],
+                                              ),
+                                              child: const Icon(
+                                                Icons.folder_open_outlined,
+                                                size: 30,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            const Text(
+                                              'Gallery',
+                                              textScaleFactor: 1.0,
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          });
+                    },
+                    child: DottedBorder(
+                      color: Colors.grey,
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5),
+                        child: Center(
+                            child: Icon(
+                          Icons.add,
+                          color: Colors.grey,
+                          size: 50,
+                        )),
+                      ),
                     ),
                   ),
                   SizedBox(
