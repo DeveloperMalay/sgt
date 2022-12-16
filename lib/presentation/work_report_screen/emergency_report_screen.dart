@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sgt/presentation/map_screen/map_screen.dart';
 import '../../utils/const.dart';
 import '../home.dart';
+import 'widget/edit_location.dart';
 
 class EmergencyReportScreen extends StatefulWidget {
   const EmergencyReportScreen({super.key});
@@ -149,7 +150,8 @@ class _EmergencyReportScreenState extends State<EmergencyReportScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MapScreen()));
+                                    builder: (context) =>
+                                        const EditLocationScreen()));
                           },
                           child: Text(
                             'Edit Location',

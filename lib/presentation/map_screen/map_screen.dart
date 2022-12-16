@@ -10,10 +10,10 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   final Map<String, Marker> _markers = {};
-  Future<void> _onMapCreated(GoogleMapController controller) async {
+  // Future<void> _onMapCreated(GoogleMapController controller) async {
     // final googleOffices = await locations.getGoogleOffices();
-    setState(() {
-      _markers.clear();
+    // setState(() {
+    //   _markers.clear();
 
       // final marker = Marker(
       //   markerId: MarkerId(office.name),
@@ -24,8 +24,8 @@ class _MapScreenState extends State<MapScreen> {
       //   ),
       // );
       // _markers[office.name] = marker;
-    });
-  }
+  //   });
+  // }
 
   LatLng currentlocation = const LatLng(22.572645, 88.363892);
   @override
